@@ -1027,7 +1027,9 @@ static UG_RESULT _UG_DeleteObject( UG_WINDOW* wnd, UG_U8 type, UG_U8 id )
       obj->data = NULL;
       obj->event = 0;
       obj->id = 0;
+      #ifdef USE_TOUCH
       obj->touch_state = 0;
+      #endif
       obj->type = 0;
       obj->update = NULL;
       return UG_RESULT_OK;
@@ -1035,6 +1037,7 @@ static UG_RESULT _UG_DeleteObject( UG_WINDOW* wnd, UG_U8 type, UG_U8 id )
    return UG_RESULT_FAIL;
 }
 
+#ifdef USE_TOUCH
 static void _UG_ProcessTouchData( UG_WINDOW* wnd )
 {
    UG_S16 xp,yp;
@@ -1106,13 +1109,16 @@ static void _UG_ProcessTouchData( UG_WINDOW* wnd )
       obj->touch_state = objtouch;
    }
 }
+#endif
 
 static void _UG_UpdateObjects( UG_WINDOW* wnd )
 {
    UG_U16 i,objcnt;
    UG_OBJECT* obj;
    UG_U8 objstate;
+   #ifdef USE_TOUCH
    UG_U8 objtouch;
+   #endif
 
    /* Check each object, if it needs to be updated? */
    objcnt = wnd->objcnt;
@@ -1120,13 +1126,16 @@ static void _UG_UpdateObjects( UG_WINDOW* wnd )
    {
       obj = (UG_OBJECT*)&wnd->objlst[i];
       objstate = obj->state;
+      #ifdef USE_TOUCH
       objtouch = obj->touch_state;
+      #endif
       if ( !(objstate & OBJ_STATE_FREE) && (objstate & OBJ_STATE_VALID) )
       {
          if ( objstate & OBJ_STATE_UPDATE )
          {
             obj->update(wnd,obj);
          }
+         #ifdef USE_TOUCH
          if ( (objstate & OBJ_STATE_VISIBLE) && (objstate & OBJ_STATE_TOUCH_ENABLE) )
          {
             if ( (objtouch & (OBJ_TOUCH_STATE_CHANGED | OBJ_TOUCH_STATE_IS_PRESSED)) )
@@ -1134,6 +1143,7 @@ static void _UG_UpdateObjects( UG_WINDOW* wnd )
                obj->update(wnd,obj);
             }
          }
+         #endif
       }
    }
 }
@@ -1298,7 +1308,9 @@ void UG_Update( void )
       /* Is the window visible? */
       if ( wnd->state & WND_STATE_VISIBLE )
       {
+         #ifdef USE_TOUCH
          _UG_ProcessTouchData( wnd );
+         #endif
          _UG_UpdateObjects( wnd );
          _UG_HandleEvents( wnd );
       }
@@ -1357,12 +1369,14 @@ void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp )
    }
 }
 
+#ifdef USE_TOUCH
 void UG_TouchUpdate( UG_S16 xp, UG_S16 yp, UG_U8 state )
 {
    gui->touch.xp = xp;
    gui->touch.yp = yp;
    gui->touch.state = state;
 }
+#endif
 
 /* -------------------------------------------------------------------------------- */
 /* -- WINDOW FUNCTIONS                                                           -- */
@@ -2148,7 +2162,9 @@ UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, 
 
    /* Initialize standard object parameters */
    obj->update = _UG_ButtonUpdate;
+   #ifdef USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
+   #endif
    obj->type = OBJ_TYPE_BUTTON;
    obj->event = OBJ_EVENT_NONE;
    obj->a_rel.xs = xs;
@@ -2160,7 +2176,10 @@ UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, 
    obj->a_abs.xe = -1;
    obj->a_abs.ye = -1;
    obj->id = id;
-   obj->state |= OBJ_STATE_VISIBLE | OBJ_STATE_REDRAW | OBJ_STATE_VALID | OBJ_STATE_TOUCH_ENABLE;
+   obj->state |= OBJ_STATE_VISIBLE | OBJ_STATE_REDRAW | OBJ_STATE_VALID;
+   #ifdef USE_TOUCH
+   obj->state |= OBJ_STATE_TOUCH_ENABLE;
+   #endif
    obj->data = (void*)btn;
 
    /* Update function: Do your thing! */
@@ -2198,7 +2217,9 @@ UG_RESULT UG_ButtonHide( UG_WINDOW* wnd, UG_U8 id )
    btn = (UG_BUTTON*)(obj->data);
 
    btn->state &= ~BTN_STATE_PRESSED;
+   #ifdef USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
+   #endif
    obj->event = OBJ_EVENT_NONE;
    obj->state &= ~OBJ_STATE_VISIBLE;
    obj->state |= OBJ_STATE_UPDATE;
@@ -2553,6 +2574,7 @@ static void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
    /* -------------------------------------------------- */
    /* Object touch section                               */
    /* -------------------------------------------------- */
+   #ifdef USE_TOUCH
    if ( (obj->touch_state & OBJ_TOUCH_STATE_CHANGED) )
    {
       /* Handle 'click' event */
@@ -2577,6 +2599,7 @@ static void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
       }
       obj->touch_state &= ~OBJ_TOUCH_STATE_CHANGED;
    }
+   #endif
 
    /* -------------------------------------------------- */
    /* Object update section                              */
@@ -2687,7 +2710,9 @@ UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* chb, UG_U8 id, UG_S16 
 
    /* Initialize standard object parameters */
    obj->update = _UG_CheckboxUpdate;
+   #ifdef USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
+   #endif
    obj->type = OBJ_TYPE_CHECKBOX;
    obj->event = OBJ_EVENT_NONE;
    obj->a_rel.xs = xs;
@@ -2699,7 +2724,10 @@ UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* chb, UG_U8 id, UG_S16 
    obj->a_abs.xe = -1;
    obj->a_abs.ye = -1;
    obj->id = id;
-   obj->state |= OBJ_STATE_VISIBLE | OBJ_STATE_REDRAW | OBJ_STATE_VALID | OBJ_STATE_TOUCH_ENABLE;
+   obj->state |= OBJ_STATE_VISIBLE | OBJ_STATE_REDRAW | OBJ_STATE_VALID;
+   #ifdef USE_TOUCH
+   obj->state |= OBJ_STATE_TOUCH_ENABLE;
+   #endif
    obj->data = (void*)chb;
 
    /* Update function: Do your thing! */
@@ -2737,7 +2765,9 @@ UG_RESULT UG_CheckboxHide( UG_WINDOW* wnd, UG_U8 id )
    btn = (UG_CHECKBOX*)(obj->data);
 
    btn->state &= ~CHB_STATE_PRESSED;
+   #ifdef USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
+   #endif
    obj->event = OBJ_EVENT_NONE;
    obj->state &= ~OBJ_STATE_VISIBLE;
    obj->state |= OBJ_STATE_UPDATE;
@@ -3121,6 +3151,7 @@ static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
    /* Get object-specific data */
    chb = (UG_CHECKBOX*)(obj->data);
 
+   #ifdef USE_TOUCH
    /* -------------------------------------------------- */
    /* Object touch section                               */
    /* -------------------------------------------------- */
@@ -3150,6 +3181,7 @@ static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
       }
       obj->touch_state &= ~OBJ_TOUCH_STATE_CHANGED;
    }
+   #endif
 
    /* -------------------------------------------------- */
    /* Object update section                              */
@@ -3286,7 +3318,9 @@ UG_RESULT UG_TextboxCreate( UG_WINDOW* wnd, UG_TEXTBOX* txb, UG_U8 id, UG_S16 xs
 
    /* Initialize standard object parameters */
    obj->update = _UG_TextboxUpdate;
+   #ifdef USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
+   #endif
    obj->type = OBJ_TYPE_TEXTBOX;
    obj->event = OBJ_EVENT_NONE;
    obj->a_rel.xs = xs;
@@ -3558,12 +3592,6 @@ static void _UG_TextboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
    txb = (UG_TEXTBOX*)(obj->data);
 
    /* -------------------------------------------------- */
-   /* Object touch section                               */
-   /* -------------------------------------------------- */
-
-   /* Textbox doesn't support touch */
-
-   /* -------------------------------------------------- */
    /* Object update section                              */
    /* -------------------------------------------------- */
    if ( obj->state & OBJ_STATE_UPDATE )
@@ -3630,7 +3658,9 @@ UG_RESULT UG_ImageCreate( UG_WINDOW* wnd, UG_IMAGE* img, UG_U8 id, UG_S16 xs, UG
 
    /* Initialize standard object parameters */
    obj->update = _UG_ImageUpdate;
+   #ifdef USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
+   #endif
    obj->type = OBJ_TYPE_IMAGE;
    obj->event = OBJ_EVENT_NONE;
    obj->a_rel.xs = xs;
@@ -3705,12 +3735,6 @@ static void _UG_ImageUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
 
    /* Get object-specific data */
    img = (UG_IMAGE*)(obj->data);
-
-   /* -------------------------------------------------- */
-   /* Object touch section                               */
-   /* -------------------------------------------------- */
-
-   /* Image doesn't support touch */
 
    /* -------------------------------------------------- */
    /* Object update section                              */

@@ -146,6 +146,7 @@ typedef struct
 /* -------------------------------------------------------------------------------- */
 /* -- TOUCH                                                                      -- */
 /* -------------------------------------------------------------------------------- */
+#ifdef USE_TOUCH
 /* Touch structure */
 typedef struct
 {
@@ -156,6 +157,7 @@ typedef struct
 
 #define TOUCH_STATE_PRESSED                           1
 #define TOUCH_STATE_RELEASED                          0
+#endif
 
 /* -------------------------------------------------------------------------------- */
 /* -- OBJECTS                                                                    -- */
@@ -164,7 +166,9 @@ typedef struct
 struct S_OBJECT
 {
    UG_U8 state;                              /* object state                               */
+   #ifdef USE_TOUCH
    UG_U8 touch_state;                        /* object touch state                         */
+   #endif
    void (*update) (UG_WINDOW*,UG_OBJECT*);   /* pointer to object-specific update function */
    UG_AREA a_abs;                            /* absolute area of the object                */
    UG_AREA a_rel;                            /* relative area of the object                */
@@ -201,9 +205,12 @@ struct S_OBJECT
 #define OBJ_STATE_ENABLE                              (1<<4)
 #define OBJ_STATE_UPDATE                              (1<<5)
 #define OBJ_STATE_REDRAW                              (1<<6)
-#define OBJ_STATE_TOUCH_ENABLE                        (1<<7)
+#ifdef USE_TOUCH
+   #define OBJ_STATE_TOUCH_ENABLE                     (1<<7)
+#endif
 #define OBJ_STATE_INIT                                (OBJ_STATE_FREE | OBJ_STATE_VALID)
 
+#ifdef USE_TOUCH
 /* Object touch states */
 #define OBJ_TOUCH_STATE_CHANGED                       (1<<0)
 #define OBJ_TOUCH_STATE_PRESSED_ON_OBJECT             (1<<1)
@@ -214,6 +221,7 @@ struct S_OBJECT
 #define OBJ_TOUCH_STATE_IS_PRESSED                    (1<<6)
 #define OBJ_TOUCH_STATE_CLICK_ON_OBJECT               (1<<7)
 #define OBJ_TOUCH_STATE_INIT                          0
+#endif
 
 /* -------------------------------------------------------------------------------- */
 /* -- WINDOW                                                                     -- */
@@ -479,7 +487,9 @@ typedef struct
    void (*pset)(UG_S16,UG_S16,UG_COLOR);
    UG_S16 x_dim;
    UG_S16 y_dim;
+   #ifdef USE_TOUCH
    UG_TOUCH touch;
+   #endif
    UG_WINDOW* next_window;
    UG_WINDOW* active_window;
    UG_WINDOW* last_window;
@@ -541,7 +551,9 @@ void UG_FontSetVSpace( UG_U16 s );
 void UG_WaitForUpdate( void );
 void UG_Update( void );
 void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp );
+#ifdef USE_TOUCH
 void UG_TouchUpdate( UG_S16 xp, UG_S16 yp, UG_U8 state );
+#endif
 
 /* Driver functions */
 void UG_DriverRegister( UG_U8 type, void* driver );
