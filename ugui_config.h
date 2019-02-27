@@ -5,11 +5,11 @@
 /* -- CONFIG SECTION                                                             -- */
 /* -------------------------------------------------------------------------------- */
 
-//#define USE_MULTITASKING    
+//#define USE_MULTITASKING
 
 /* Enable color mode */
 #define USE_COLOR_RGB888   // RGB = 0xFF,0xFF,0xFF
-//#define USE_COLOR_RGB565   // RGB = 0bRRRRRGGGGGGBBBBB 
+//#define USE_COLOR_RGB565   // RGB = 0bRRRRRGGGGGGBBBBB
 
 /* Enable needed fonts here */
 //#define  USE_FONT_4X6
@@ -20,7 +20,6 @@
 //#define  USE_FONT_7X12
 //#define  USE_FONT_8X8
 //#define  USE_FONT_8X12_CYRILLIC
-//#define  USE_FONT_8X12
 //#define  USE_FONT_8X12
 //#define  USE_FONT_8X14
 //#define  USE_FONT_10X16
@@ -54,10 +53,8 @@ typedef signed long int       UG_S32;
 /* -------------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------------- */
 
-
 /* Feature enablers */
 #define USE_PRERENDER_EVENT
 #define USE_POSTRENDER_EVENT
-
 
 #endif

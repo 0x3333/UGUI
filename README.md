@@ -1,4 +1,8 @@
 # Introduction
+
+## Repo Info
+This repo is an aggregator, I added to it several commits from other forks. A list can be in the COMMITS.md. 
+
 ## What is µGUI?
 µGUI is a free and open source graphic library for embedded systems. It is platform-independent
 and can be easily ported to almost any microcontroller system. As long as the display is capable
@@ -11,7 +15,7 @@ consists of three files: **ugui.c**, **ugui.h** and **ugui_config.h**.
 * µGUI supports any display resolution
 * µGUI supports multiple different displays
 * µGUI supports any touch screen technology (e.g. AR, PCAP)
-* µGUI supports windows and objects (e.g. button, textbox)
+* µGUI supports windows and objects (e.g. button, textbox, checkbox)
 * µGUI supports platform-specific hardware acceleration
 * 16 different fonts available
 * cyrillic fonts supported
