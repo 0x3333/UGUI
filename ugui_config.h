@@ -10,8 +10,21 @@
 /* Enable color mode */
 #define USE_COLOR_RGB888   // RGB = 0xFF,0xFF,0xFF
 //#define USE_COLOR_RGB565   // RGB = 0bRRRRRGGGGGGBBBBB
+
 /* Enable Touch Support */
-// #define USE_TOUCH
+#define USE_TOUCH
+
+/* Enable Button Support */
+#define USE_OBJ_BUTTON
+
+/* Enable Textbox Support */
+#define USE_OBJ_TEXTBOX
+
+/* Enable Checkbox Support */
+#define USE_OBJ_CHECKBOX
+
+/* Enable Image Support */
+#define USE_OBJ_IMAGE
 
 /* Enable needed fonts here */
 //#define  USE_FONT_4X6
