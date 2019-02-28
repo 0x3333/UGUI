@@ -6,19 +6,19 @@
 #if defined(UGUI_USE_COLOR_RGB888)
 
 #if !defined(C_DESKTOP_COLOR)
-#define C_DESKTOP_COLOR              0x5E8BEF
+#define C_DESKTOP_COLOR                0x5E8BEF
 #endif
 #if !defined(C_FORE_COLOR)
-#define C_FORE_COLOR                 C_BLACK
+#define C_FORE_COLOR                   C_BLACK
 #endif
 #if !defined(C_BACK_COLOR)
-#define C_BACK_COLOR                 0xF0F0F0
+#define C_BACK_COLOR                   0xF0F0F0
 #endif
 #if !defined(C_TITLE_FORE_COLOR)
-#define C_TITLE_FORE_COLOR    C_WHITE
+#define C_TITLE_FORE_COLOR             C_WHITE
 #endif
 #if !defined(C_TITLE_BACK_COLOR)
-#define C_TITLE_BACK_COLOR    C_BLUE
+#define C_TITLE_BACK_COLOR             C_BLUE
 #endif
 #if !defined(C_INACTIVE_TITLE_FORE_COLOR)
 #define C_INACTIVE_TITLE_FORE_COLOR    C_WHITE
@@ -120,19 +120,19 @@ const UG_COLOR pal_checkbox_released[] = {
 #elif defined(UGUI_USE_COLOR_RGB565)
 
 #if !defined(C_DESKTOP_COLOR)
-#define C_DESKTOP_COLOR              0x5C5D
+#define C_DESKTOP_COLOR                0x5C5D
 #endif
 #if !defined(C_FORE_COLOR)
-#define C_FORE_COLOR                 C_BLACK
+#define C_FORE_COLOR                   C_BLACK
 #endif
 #if !defined(C_BACK_COLOR)
-#define C_BACK_COLOR                 C_WHITE_94
+#define C_BACK_COLOR                   C_WHITE_94
 #endif
 #if !defined(C_TITLE_FORE_COLOR)
-#define C_TITLE_FORE_COLOR    C_WHITE
+#define C_TITLE_FORE_COLOR             C_WHITE
 #endif
 #if !defined(C_TITLE_BACK_COLOR)
-#define C_TITLE_BACK_COLOR    C_BLUE
+#define C_TITLE_BACK_COLOR             C_BLUE
 #endif
 #if !defined(C_INACTIVE_TITLE_FORE_COLOR)
 #define C_INACTIVE_TITLE_FORE_COLOR    C_WHITE
@@ -234,19 +234,19 @@ const UG_COLOR pal_checkbox_released[] = {
 #elif defined(UGUI_USE_COLOR_BW)
 
 #if !defined(C_DESKTOP_COLOR)
-#define C_DESKTOP_COLOR              C_BLACK
+#define C_DESKTOP_COLOR                C_BLACK
 #endif
 #if !defined(C_FORE_COLOR)
-#define C_FORE_COLOR                 C_BLACK
+#define C_FORE_COLOR                   C_BLACK
 #endif
 #if !defined(C_BACK_COLOR)
-#define C_BACK_COLOR                 C_WHITE
+#define C_BACK_COLOR                   C_WHITE
 #endif
 #if !defined(C_TITLE_FORE_COLOR)
-#define C_TITLE_FORE_COLOR    C_BLACK
+#define C_TITLE_FORE_COLOR             C_BLACK
 #endif
 #if !defined(C_TITLE_BACK_COLOR)
-#define C_TITLE_BACK_COLOR    C_WHITE
+#define C_TITLE_BACK_COLOR             C_WHITE
 #endif
 #if !defined(C_INACTIVE_TITLE_FORE_COLOR)
 #define C_INACTIVE_TITLE_FORE_COLOR    C_WHITE

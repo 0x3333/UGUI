@@ -16,6 +16,9 @@ typedef UG_U16                       UG_COLOR;
 #elif defined(UGUI_USE_COLOR_BW)
 typedef UG_U8                        UG_COLOR;
 #endif
+#if !defined(UGUI_USE_COLOR_RGB888) && !defined(UGUI_USE_COLOR_RGB565) && !defined(UGUI_USE_COLOR_BW)
+#error "You must define a color space!"
+#endif
 
 #if defined(UGUI_USE_COLOR_RGB565)
 

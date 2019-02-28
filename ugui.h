@@ -20,8 +20,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "ugui_config.h"
-#include "ugui_fonts.h"
 #include "ugui_colors.h"
+#include "ugui_fonts.h"
 #include "ugui_theme_default.h"
 
 /* -------------------------------------------------------------------------------- */
@@ -77,8 +77,8 @@ typedef UG_S8                                         UG_RESULT;
 /* -------------------------------------------------------------------------------- */
 /* -- FUNCTION RESULTS                                                           -- */
 /* -------------------------------------------------------------------------------- */
-#define UG_RESULT_FAIL                               -1
-#define UG_RESULT_OK                                  0
+#define UG_RESULT_FAIL                                (UG_U8)(-1)
+#define UG_RESULT_OK                                  (UG_U8)(0)
 
 /* -------------------------------------------------------------------------------- */
 /* -- UNIVERSAL STRUCTURES                                                       -- */

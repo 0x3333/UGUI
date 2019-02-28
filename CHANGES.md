@@ -1,3 +1,5 @@
+***BROKEN COMMIT, STILL NEED SOME CHANGES***
+
 # Changes
 
 * Fonts, Components, Colors have been externalized to a separated file
