@@ -1,6 +1,11 @@
 # Changes
 
-* Fonts have been externalized to a separated file
+* Fonts, Components, Colors have been externalized to a separated file
+* Pseudo Theme created(See `ugui_theme_default.h`)
+* Added `flush` function. In case the display driver uses Framebuffer, this function will be called after `UG_Update` is called
+* Prefixed all defines with `UGUI_`
+* Touch support is optional using `UGUI_USE_TOUCH` define
+* Added `UGUI_USE_COLOR_BW` for monochromatic displays, also added theme support
 
 # Commits added from other forks
 

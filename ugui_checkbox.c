@@ -29,7 +29,7 @@ UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* chb, UG_U8 id, UG_S16 
 
    /* Initialize standard object parameters */
    obj->update = _UG_CheckboxUpdate;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
    #endif
    obj->type = OBJ_TYPE_CHECKBOX;
@@ -44,7 +44,7 @@ UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* chb, UG_U8 id, UG_S16 
    obj->a_abs.ye = -1;
    obj->id = id;
    obj->state |= OBJ_STATE_VISIBLE | OBJ_STATE_REDRAW | OBJ_STATE_VALID;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    obj->state |= OBJ_STATE_TOUCH_ENABLE;
    #endif
    obj->data = (void*)chb;
@@ -84,7 +84,7 @@ UG_RESULT UG_CheckboxHide( UG_WINDOW* wnd, UG_U8 id )
    btn = (UG_CHECKBOX*)(obj->data);
 
    btn->state &= ~CHB_STATE_PRESSED;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
    #endif
    obj->event = OBJ_EVENT_NONE;
@@ -470,7 +470,7 @@ static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
    /* Get object-specific data */
    chb = (UG_CHECKBOX*)(obj->data);
 
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    /* -------------------------------------------------- */
    /* Object touch section                               */
    /* -------------------------------------------------- */
@@ -524,7 +524,7 @@ static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
          /* Full redraw necessary? */
          if ( (obj->state & OBJ_STATE_REDRAW) || (chb->state & CHB_STATE_ALWAYS_REDRAW) )
          {
-#ifdef USE_PRERENDER_EVENT
+#ifdef UGUI_USE_PRERENDER_EVENT
             _UG_SendObjectPrerenderEvent(wnd, obj);
 #endif
             txt.bc = chb->bc;
@@ -565,7 +565,7 @@ static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             txt.str = chb->str;
             _UG_PutText( &txt );
             obj->state &= ~OBJ_STATE_REDRAW;
-#ifdef USE_POSTRENDER_EVENT
+#ifdef UGUI_USE_POSTRENDER_EVENT
             _UG_SendObjectPostrenderEvent(wnd, obj);
 #endif
          }

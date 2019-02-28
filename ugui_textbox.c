@@ -27,7 +27,7 @@ UG_RESULT UG_TextboxCreate( UG_WINDOW* wnd, UG_TEXTBOX* txb, UG_U8 id, UG_S16 xs
 
    /* Initialize standard object parameters */
    obj->update = _UG_TextboxUpdate;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
    #endif
    obj->type = OBJ_TYPE_TEXTBOX;
@@ -317,7 +317,7 @@ static void _UG_TextboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             obj->a_abs.ye = obj->a_rel.ye + a.ys;
             if ( obj->a_abs.ye >= wnd->ye ) return;
             if ( obj->a_abs.xe >= wnd->xe ) return;
-#ifdef USE_PRERENDER_EVENT
+#ifdef UGUI_USE_PRERENDER_EVENT
             _UG_SendObjectPrerenderEvent(wnd, obj);
 #endif
 
@@ -338,7 +338,7 @@ static void _UG_TextboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             txt.str = txb->str;
             _UG_PutText( &txt );
             obj->state &= ~OBJ_STATE_REDRAW;
-#ifdef USE_POSTRENDER_EVENT
+#ifdef UGUI_USE_POSTRENDER_EVENT
             _UG_SendObjectPostrenderEvent(wnd, obj);
 #endif
          }

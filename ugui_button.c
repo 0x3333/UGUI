@@ -28,7 +28,7 @@ UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, 
 
    /* Initialize standard object parameters */
    obj->update = _UG_ButtonUpdate;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
    #endif
    obj->type = OBJ_TYPE_BUTTON;
@@ -43,7 +43,7 @@ UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, 
    obj->a_abs.ye = -1;
    obj->id = id;
    obj->state |= OBJ_STATE_VISIBLE | OBJ_STATE_REDRAW | OBJ_STATE_VALID;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    obj->state |= OBJ_STATE_TOUCH_ENABLE;
    #endif
    obj->data = (void*)btn;
@@ -83,7 +83,7 @@ UG_RESULT UG_ButtonHide( UG_WINDOW* wnd, UG_U8 id )
    btn = (UG_BUTTON*)(obj->data);
 
    btn->state &= ~BTN_STATE_PRESSED;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
    #endif
    obj->event = OBJ_EVENT_NONE;
@@ -440,7 +440,7 @@ static void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
    /* -------------------------------------------------- */
    /* Object touch section                               */
    /* -------------------------------------------------- */
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    if ( (obj->touch_state & OBJ_TOUCH_STATE_CHANGED) )
    {
       /* Handle 'click' event */
@@ -484,7 +484,7 @@ static void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             obj->a_abs.ye = obj->a_rel.ye + a.ys;
             if ( obj->a_abs.ye > wnd->ye ) return;
             if ( obj->a_abs.xe > wnd->xe ) return;
-#ifdef USE_PRERENDER_EVENT
+#ifdef UGUI_USE_PRERENDER_EVENT
             _UG_SendObjectPrerenderEvent(wnd, obj);
 #endif
 
@@ -525,7 +525,7 @@ static void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             txt.str = btn->str;
             _UG_PutText( &txt );
             obj->state &= ~OBJ_STATE_REDRAW;
-#ifdef USE_POSTRENDER_EVENT
+#ifdef UGUI_USE_POSTRENDER_EVENT
             _UG_SendObjectPostrenderEvent(wnd, obj);
 #endif
          }

@@ -22,6 +22,7 @@
 #include "ugui_config.h"
 #include "ugui_fonts.h"
 #include "ugui_colors.h"
+#include "ugui_theme_default.h"
 
 /* -------------------------------------------------------------------------------- */
 /* -- TYPEDEFS                                                                   -- */
@@ -29,6 +30,7 @@
 typedef struct S_OBJECT                               UG_OBJECT;
 typedef struct S_WINDOW                               UG_WINDOW;
 typedef UG_S8                                         UG_RESULT;
+
 /* -------------------------------------------------------------------------------- */
 /* -- DEFINES                                                                    -- */
 /* -------------------------------------------------------------------------------- */
@@ -146,7 +148,7 @@ typedef struct
 /* -------------------------------------------------------------------------------- */
 /* -- TOUCH                                                                      -- */
 /* -------------------------------------------------------------------------------- */
-#ifdef USE_TOUCH
+#ifdef UGUI_USE_TOUCH
 /* Touch structure */
 typedef struct
 {
@@ -166,7 +168,7 @@ typedef struct
 struct S_OBJECT
 {
    UG_U8 state;                              /* object state                               */
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    UG_U8 touch_state;                        /* object touch state                         */
    #endif
    void (*update) (UG_WINDOW*,UG_OBJECT*);   /* pointer to object-specific update function */
@@ -184,10 +186,10 @@ struct S_OBJECT
 /* Standard object events */
 #define OBJ_EVENT_NONE                                0
 #define OBJ_EVENT_CLICKED                             1
-#ifdef USE_PRERENDER_EVENT
+#ifdef UGUI_USE_PRERENDER_EVENT
 #define OBJ_EVENT_PRERENDER                           2
 #endif
-#ifdef USE_POSTRENDER_EVENT
+#ifdef UGUI_UGUI_USE_POSTRENDER_EVENT
 #define OBJ_EVENT_POSTRENDER                          3
 #endif
 #define OBJ_EVENT_PRESSED                             4
@@ -201,12 +203,12 @@ struct S_OBJECT
 #define OBJ_STATE_ENABLE                              (1<<4)
 #define OBJ_STATE_UPDATE                              (1<<5)
 #define OBJ_STATE_REDRAW                              (1<<6)
-#ifdef USE_TOUCH
+#ifdef UGUI_USE_TOUCH
    #define OBJ_STATE_TOUCH_ENABLE                     (1<<7)
 #endif
 #define OBJ_STATE_INIT                                (OBJ_STATE_FREE | OBJ_STATE_VALID)
 
-#ifdef USE_TOUCH
+#ifdef UGUI_USE_TOUCH
 /* Object touch states */
 #define OBJ_TOUCH_STATE_CHANGED                       (1<<0)
 #define OBJ_TOUCH_STATE_PRESSED_ON_OBJECT             (1<<1)
@@ -293,9 +295,10 @@ typedef struct
 typedef struct
 {
    void (*pset)(UG_S16,UG_S16,UG_COLOR);
+   void (*flush)(void);
    UG_S16 x_dim;
    UG_S16 y_dim;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    UG_TOUCH touch;
    #endif
    UG_WINDOW* next_window;
@@ -322,13 +325,13 @@ typedef struct
    UG_DRIVER driver[NUMBER_OF_DRIVERS];
 } UG_GUI;
 
-#define UG_SATUS_WAIT_FOR_UPDATE                      (1<<0)
+#define UG_STATUS_WAIT_FOR_UPDATE                     (1<<0)
 
 /* -------------------------------------------------------------------------------- */
 /* -- PROTOTYPES                                                                 -- */
 /* -------------------------------------------------------------------------------- */
 /* Classic functions */
-UG_S16 UG_Init( UG_GUI* g, void (*p)(UG_S16,UG_S16,UG_COLOR), UG_S16 x, UG_S16 y );
+UG_S16 UG_Init( UG_GUI* g, void (*p)(UG_S16,UG_S16,UG_COLOR), void (*flush)(void), UG_S16 x, UG_S16 y );
 UG_S16 UG_SelectGUI( UG_GUI* g );
 void UG_FontSelect( const UG_FONT* font );
 void UG_FillScreen( UG_COLOR c );
@@ -359,7 +362,7 @@ void UG_FontSetVSpace( UG_U16 s );
 void UG_WaitForUpdate( void );
 void UG_Update( void );
 void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp );
-#ifdef USE_TOUCH
+#ifdef UGUI_USE_TOUCH
 void UG_TouchUpdate( UG_S16 xp, UG_S16 yp, UG_U8 state );
 #endif
 
@@ -367,6 +370,19 @@ void UG_TouchUpdate( UG_S16 xp, UG_S16 yp, UG_U8 state );
 void UG_DriverRegister( UG_U8 type, void* driver );
 void UG_DriverEnable( UG_U8 type );
 void UG_DriverDisable( UG_U8 type );
+
+/* Internal API functions */
+void _UG_PutText(UG_TEXT* txt);
+UG_OBJECT* _UG_SearchObject( UG_WINDOW* wnd, UG_U8 type, UG_U8 id );
+void _UG_DrawObjectFrame( UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye, UG_COLOR* p );
+UG_OBJECT* _UG_GetFreeObject( UG_WINDOW* wnd );
+UG_RESULT _UG_DeleteObject( UG_WINDOW* wnd, UG_U8 type, UG_U8 id );
+#ifdef UGUI_USE_PRERENDER_EVENT
+void _UG_SendObjectPrerenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj);
+#endif
+#ifdef UGUI_USE_POSTRENDER_EVENT
+void _UG_SendObjectPostrenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj);
+#endif
 
 /* Window functions */
 UG_RESULT UG_WindowCreate( UG_WINDOW* wnd, UG_OBJECT* objlst, UG_U8 objcnt, void (*cb)( UG_MESSAGE* ) );
@@ -415,6 +431,7 @@ UG_S16 UG_WindowGetOuterWidth( UG_WINDOW* wnd );
 UG_S16 UG_WindowGetInnerHeight( UG_WINDOW* wnd );
 UG_S16 UG_WindowGetOuterHeight( UG_WINDOW* wnd );
 
-#include "ugui_objs.h"
+/* Pointer to the gui */
+extern UG_GUI* gui;
 
 #endif

@@ -27,6 +27,11 @@ consists of three files: **ugui.c**, **ugui.h** and **ugui_config.h**.
 
 ## µGUI Requirements
 µGUI is platform-independent, so there is no need to use a certain embedded system. In order to
-use µGUI, only two requirements are necessary:
+use µGUI, only 3 requirements are necessary:
 * a C-function which is able to control pixels of the target display.
+* a C-function which is able to flush the framebuffer to the target display(See `CHANGES.md`).
 * integer types for the target platform have to be adjusted in ugui_config.h.
+
+## Modifications in this Fork
+
+See `CHANGES.md`.

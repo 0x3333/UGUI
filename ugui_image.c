@@ -20,7 +20,7 @@ UG_RESULT UG_ImageCreate( UG_WINDOW* wnd, UG_IMAGE* img, UG_U8 id, UG_S16 xs, UG
 
    /* Initialize standard object parameters */
    obj->update = _UG_ImageUpdate;
-   #ifdef USE_TOUCH
+   #ifdef UGUI_USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
    #endif
    obj->type = OBJ_TYPE_IMAGE;

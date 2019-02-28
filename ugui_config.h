@@ -5,45 +5,40 @@
 /* -- CONFIG SECTION                                                             -- */
 /* -------------------------------------------------------------------------------- */
 
-//#define USE_MULTITASKING
-
 /* Enable color mode */
-#define USE_COLOR_RGB888   // RGB = 0xFF,0xFF,0xFF
-//#define USE_COLOR_RGB565   // RGB = 0bRRRRRGGGGGGBBBBB
+#if !defined(UGUI_USE_COLOR_RGB888) && !defined(UGUI_USE_COLOR_RGB565) && !defined(UGUI_USE_COLOR_BW)
+#error "You must define a color space!"
+#endif
+// #define UGUI_USE_COLOR_RGB888   // RGB = 0xFF,0xFF,0xFF
+// #define UGUI_USE_COLOR_RGB565   // RGB = 0bRRRRRGGGGGGBBBBB
+// #define UGUI_USE_COLOR_BW   // BW = 0x00|0xFF
 
 /* Enable Touch Support */
-#define USE_TOUCH
+// #define UGUI_USE_TOUCH
 
-/* Enable Button Support */
-#define USE_OBJ_BUTTON
+/* Enable needed fonts */
+#define  UGUI_USE_FONT_4X6
+#define  UGUI_USE_FONT_5X8
+#define  UGUI_USE_FONT_5X12
+#define  UGUI_USE_FONT_6X8
+#define  UGUI_USE_FONT_6X10
+#define  UGUI_USE_FONT_7X12
+#define  UGUI_USE_FONT_8X8
+#define  UGUI_USE_FONT_8X12_CYRILLIC
+#define  UGUI_USE_FONT_8X12
+#define  UGUI_USE_FONT_8X14
+#define  UGUI_USE_FONT_10X16
+#define  UGUI_USE_FONT_12X16
+#define  UGUI_USE_FONT_12X20
+#define  UGUI_USE_FONT_16X26
+#define  UGUI_USE_FONT_22X36
+#define  UGUI_USE_FONT_24X40
+#define  UGUI_USE_FONT_32X53
 
-/* Enable Textbox Support */
-#define USE_OBJ_TEXTBOX
-
-/* Enable Checkbox Support */
-#define USE_OBJ_CHECKBOX
-
-/* Enable Image Support */
-#define USE_OBJ_IMAGE
-
-/* Enable needed fonts here */
-//#define  USE_FONT_4X6
-//#define  USE_FONT_5X8
-//#define  USE_FONT_5X12
-//#define  USE_FONT_6X8
-//#define  USE_FONT_6X10
-//#define  USE_FONT_7X12
-//#define  USE_FONT_8X8
-//#define  USE_FONT_8X12_CYRILLIC
-//#define  USE_FONT_8X12
-//#define  USE_FONT_8X14
-//#define  USE_FONT_10X16
-//#define  USE_FONT_12X16
-//#define  USE_FONT_12X20
-//#define  USE_FONT_16X26
-//#define  USE_FONT_22X36
-//#define  USE_FONT_24X40
-//#define  USE_FONT_32X53
+/* Feature enablers */
+// #define UGUI_USE_PRERENDER_EVENT
+// #define UGUI_USE_POSTRENDER_EVENT
+// #define UGUI_USE_MULTITASKING
 
 /* Specify platform-dependent integer types here */
 
@@ -55,7 +50,6 @@ typedef int16_t      UG_S16;
 typedef uint32_t     UG_U32;
 typedef int32_t      UG_S32;
 
-
 /* Example for dsPIC33
 typedef unsigned char         UG_U8;
 typedef signed char           UG_S8;
@@ -64,12 +58,5 @@ typedef signed int            UG_S16;
 typedef unsigned long int     UG_U32;
 typedef signed long int       UG_S32;
 */
-
-/* -------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------- */
-
-/* Feature enablers */
-#define USE_PRERENDER_EVENT
-#define USE_POSTRENDER_EVENT
 
 #endif
