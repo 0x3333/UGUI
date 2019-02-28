@@ -1,7 +1,7 @@
 # Introduction
 
 ## Repo Info
-This repo is an aggregator, I added to it several commits from other forks. A list can be in the CHANGES.md. 
+This repo is an aggregator, I added to it several commits from other forks. A list can be in the `CHANGES.md`. 
 
 ## What is µGUI?
 µGUI is a free and open source graphic library for embedded systems. It is platform-independent
