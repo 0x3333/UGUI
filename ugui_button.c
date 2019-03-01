@@ -7,6 +7,14 @@
 /* Static functions */
 static void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj);
 
+const UG_COLOR pal_button_pressed[] = {
+    C_PAL_BUTTON_PRESSED
+};
+
+static const UG_COLOR pal_button_released[] = {
+    C_PAL_BUTTON_RELEASED
+};
+
 UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye )
 {
    UG_OBJECT* obj;

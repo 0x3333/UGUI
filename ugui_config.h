@@ -5,6 +5,8 @@
 /* -- CONFIG SECTION                                                             -- */
 /* -------------------------------------------------------------------------------- */
 
+#include <stdint.h>
+
 /* Enable color mode */
 // #define UGUI_USE_COLOR_RGB888   // RGB = 0xFF,0xFF,0xFF
 // #define UGUI_USE_COLOR_RGB565   // RGB = 0bRRRRRGGGGGGBBBBB
@@ -14,9 +16,11 @@
 // #define UGUI_USE_TOUCH
 
 /* Enable needed fonts */
-// #define  UGUI_USE_FONT_4X6
-// #define  UGUI_USE_FONT_5X8
-// #define  UGUI_USE_FONT_5X12
+#define __UG_FONT_DATA const
+
+#define  UGUI_USE_FONT_4X6
+#define  UGUI_USE_FONT_5X8
+#define  UGUI_USE_FONT_5X12
 // #define  UGUI_USE_FONT_6X8
 // #define  UGUI_USE_FONT_6X10
 // #define  UGUI_USE_FONT_7X12
@@ -39,7 +43,6 @@
 
 /* Specify platform-dependent integer types here */
 
-#define __UG_FONT_DATA const
 typedef uint8_t      UG_U8;
 typedef int8_t       UG_S8;
 typedef uint16_t     UG_U16;
@@ -56,4 +59,4 @@ typedef unsigned long int     UG_U32;
 typedef signed long int       UG_S32;
 */
 
-#endif
+#endif //__UGUI_CONFIG_H

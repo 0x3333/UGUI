@@ -18,11 +18,12 @@
 #define __UGUI_H
 
 #include <stdlib.h>
-#include <stdint.h>
 #include "ugui_config.h"
-#include "ugui_colors.h"
-#include "ugui_fonts.h"
-#include "ugui_theme_default.h"
+#if !defined(UGUI_USE_CUSTOM_THEME)
+#include "ugui_theme.h"
+#else
+#include "ugui_theme_custom.h"
+#endif
 
 /* -------------------------------------------------------------------------------- */
 /* -- TYPEDEFS                                                                   -- */
@@ -30,6 +31,19 @@
 typedef struct S_OBJECT                               UG_OBJECT;
 typedef struct S_WINDOW                               UG_WINDOW;
 typedef UG_S8                                         UG_RESULT;
+#if defined(UGUI_USE_COLOR_RGB888)
+typedef UG_U32                       UG_COLOR;
+#elif defined(UGUI_USE_COLOR_RGB565)
+typedef UG_U16                       UG_COLOR;
+#elif defined(UGUI_USE_COLOR_BW)
+typedef UG_U8                        UG_COLOR;
+#endif
+#if !defined(UGUI_USE_COLOR_RGB888) && !defined(UGUI_USE_COLOR_RGB565) && !defined(UGUI_USE_COLOR_BW)
+#error "You must define a color space!"
+#endif
+#if !defined(C_PAL_WINDOW)
+#error "You must define a theme!"
+#endif
 
 /* -------------------------------------------------------------------------------- */
 /* -- DEFINES                                                                    -- */
@@ -77,8 +91,51 @@ typedef UG_S8                                         UG_RESULT;
 /* -------------------------------------------------------------------------------- */
 /* -- FUNCTION RESULTS                                                           -- */
 /* -------------------------------------------------------------------------------- */
-#define UG_RESULT_FAIL                                (UG_U8)(-1)
-#define UG_RESULT_OK                                  (UG_U8)(0)
+#define UG_RESULT_FAIL                                -1
+#define UG_RESULT_OK                                  0
+
+/* -------------------------------------------------------------------------------- */
+/* -- µGUI FONTS                                                                 -- */
+/* -- Source: http://www.mikrocontroller.net/user/show/benedikt                  -- */
+/* -------------------------------------------------------------------------------- */
+
+/* Font structures */
+typedef enum
+{
+	FONT_TYPE_1BPP,
+	FONT_TYPE_8BPP
+} FONT_TYPE;
+
+typedef struct
+{
+   UG_U8* p;
+   FONT_TYPE font_type;
+   UG_S16 char_width;
+   UG_S16 char_height;
+   UG_U16 start_char;
+   UG_U16 end_char;
+   UG_U8  *widths;
+} UG_FONT;
+
+#define UGUI_DECLARE_FONT(name, varPointer, bpp, width, height)   const UG_FONT name = { (UG_U8*) varPointer, bpp, width, height, 0, 255, NULL };
+
+#include "fonts/font_4x6.h"
+#include "fonts/font_5x8.h"
+#include "fonts/font_5x12.h"
+#include "fonts/font_6x8.h"
+#include "fonts/font_6x10.h"
+#include "fonts/font_7x12.h"
+#include "fonts/font_8x8.h"
+#include "fonts/font_8x12.h"
+#include "fonts/font_8x12_cyrillic.h"
+#include "fonts/font_8x14.h"
+#include "fonts/font_10x16.h"
+#include "fonts/font_12x16.h"
+#include "fonts/font_12x20.h"
+#include "fonts/font_16x26.h"
+#include "fonts/font_22x36.h"
+#include "fonts/font_24x40.h"
+#include "fonts/font_32x53.h"
 
 /* -------------------------------------------------------------------------------- */
 /* -- UNIVERSAL STRUCTURES                                                       -- */

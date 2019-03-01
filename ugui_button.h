@@ -6,6 +6,11 @@
 /* -------------------------------------------------------------------------------- */
 /* -- BUTTON OBJECT                                                              -- */
 /* -------------------------------------------------------------------------------- */
+
+#if !defined(C_PAL_BUTTON_PRESSED) || !defined(C_PAL_BUTTON_RELEASED)
+#error "You must define a theme!"
+#endif
+
 /* Button structure */
 typedef struct
 {

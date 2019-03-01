@@ -22,6 +22,10 @@ static void _UG_WindowUpdate( UG_WINDOW* wnd );
 static UG_RESULT _UG_WindowClear( UG_WINDOW* wnd );
 static void _UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const UG_FONT* font);
 
+static const UG_COLOR pal_window[] = {
+    C_PAL_WINDOW
+};
+
 /* Pointer to the gui */
 UG_GUI* gui;
 

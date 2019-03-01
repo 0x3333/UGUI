@@ -7,6 +7,14 @@
 /* Static functions */
 static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj);
 
+const UG_COLOR pal_checkbox_pressed[] = {
+    C_PAL_CHECKBOX_PRESSED
+};
+
+const UG_COLOR pal_checkbox_released[] = {
+    C_PAL_CHECKBOX_RELEASED
+};
+
 UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* chb, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye )
 {
    UG_OBJECT* obj;

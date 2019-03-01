@@ -6,6 +6,11 @@
 /* -------------------------------------------------------------------------------- */
 /* -- CHECKBOX OBJECT                                                            -- */
 /* -------------------------------------------------------------------------------- */
+
+#if !defined(C_PAL_CHECKBOX_PRESSED) || !defined(C_PAL_CHECKBOX_RELEASED)
+#error "You must define a theme!"
+#endif
+
 /* Checkbox structure */
 typedef struct
 {

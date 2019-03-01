@@ -6,20 +6,6 @@
 /* -- Source: http://www.rapidtables.com/web/color/RGB_Color.htm                 -- */
 /* -------------------------------------------------------------------------------- */
 
-/* -------------------------------------------------------------------------------- */
-/* -- TYPEDEFS                                                                   -- */
-/* -------------------------------------------------------------------------------- */
-#if defined(UGUI_USE_COLOR_RGB888)
-typedef UG_U32                       UG_COLOR;
-#elif defined(UGUI_USE_COLOR_RGB565)
-typedef UG_U16                       UG_COLOR;
-#elif defined(UGUI_USE_COLOR_BW)
-typedef UG_U8                        UG_COLOR;
-#endif
-#if !defined(UGUI_USE_COLOR_RGB888) && !defined(UGUI_USE_COLOR_RGB565) && !defined(UGUI_USE_COLOR_BW)
-#error "You must define a color space!"
-#endif
-
 #if defined(UGUI_USE_COLOR_RGB565)
 
 #define C_MAROON                     0x8000
