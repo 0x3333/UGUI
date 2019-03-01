@@ -32,18 +32,18 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     UG_WindowSetTitleTextFont (&wnd, &FONT_6X8);
     UG_WindowSetTitleText(&wnd, "App Title");
 
-    UG_ButtonCreate(&wnd, &btn, BTN_ID_0, 3, 3, 42, 33);
+    UG_ButtonCreate(&wnd, &btn, BTN_ID_0, UGUI_POS(3, 3, 40, 30));
     UG_ButtonSetFont(&wnd, BTN_ID_0, &FONT_6X8);
     UG_ButtonSetText(&wnd, BTN_ID_0, "BTN");
     UG_ButtonShow(&wnd, BTN_ID_0);
 
-    UG_CheckboxCreate(&wnd, &chb, CHB_ID_0, 48, 11, 100, 26);
+    UG_CheckboxCreate(&wnd, &chb, CHB_ID_0, UGUI_POS(46, 3, 40, 12));
     UG_CheckboxSetFont(&wnd, CHB_ID_0, &FONT_6X8);
     UG_CheckboxSetText(&wnd, CHB_ID_0, "CHB");
     UG_CheckboxSetAlignment(&wnd, CHB_ID_0, ALIGN_CENTER_LEFT);
     UG_CheckboxShow(&wnd, CHB_ID_0);
 
-    UG_TextboxCreate(&wnd, &txt, TXB_ID_0, 100, 3, 200, 33);
+    UG_TextboxCreate(&wnd, &txt, TXB_ID_0, UGUI_POS(89, 3, 100, 30));
     UG_TextboxSetFont(&wnd, TXB_ID_0, &FONT_16X26);
     UG_TextboxSetText(&wnd, TXB_ID_0, "TXT");
     UG_TextboxShow(&wnd, TXB_ID_0);

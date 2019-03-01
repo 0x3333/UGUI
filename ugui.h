@@ -56,6 +56,9 @@ typedef UG_U8                        UG_COLOR;
 /* -- DEFINES                                                                    -- */
 /* -------------------------------------------------------------------------------- */
 
+/* Sizing helpers */
+#define UGUI_POS(xs, ys, w, h)                        xs, ys, xs+w, ys+h
+
 /* Alignments */
 #define ALIGN_H_LEFT                                  (1<<0)
 #define ALIGN_H_CENTER                                (1<<1)

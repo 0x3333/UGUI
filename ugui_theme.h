@@ -133,11 +133,25 @@
                                        C_WHITE,      \
                                        C_WHITE,      \
                                        /* Frame 2 */ \
-                                       C_BLACK,      \
-                                       C_BLACK,      \
+                                       C_WHITE,      \
+                                       C_WHITE,      \
                                        C_WHITE,      \
                                        C_WHITE
-#define C_PAL_BUTTON_RELEASED          C_PAL_WINDOW
+#define C_PAL_BUTTON_RELEASED          /* Frame 0 */ \
+                                       C_BLACK,      \
+                                       C_BLACK,      \
+                                       C_BLACK,      \
+                                       C_BLACK,      \
+                                       /* Frame 1 */ \
+                                       C_WHITE,      \
+                                       C_WHITE,      \
+                                       C_BLACK,      \
+                                       C_BLACK,      \
+                                       /* Frame 2 */ \
+                                       C_WHITE,      \
+                                       C_WHITE,      \
+                                       C_WHITE,      \
+                                       C_WHITE
 
 #define C_PAL_CHECKBOX_PRESSED         C_PAL_BUTTON_PRESSED
 #define C_PAL_CHECKBOX_RELEASED        C_PAL_BUTTON_RELEASED
