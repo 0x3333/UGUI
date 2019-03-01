@@ -15,6 +15,7 @@
 //
 /* -------------------------------------------------------------------------------- */
 #include "ugui.h"
+#include "ugui_fonts_data.h"
 
 /* Static functions */
 static UG_RESULT _UG_WindowDrawTitle( UG_WINDOW* wnd );

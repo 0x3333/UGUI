@@ -1,7 +1,7 @@
 # Introduction
 
-## Repo Info
-This repo is an aggregator, I added to it several commits from other forks. A list can be in the `CHANGES.md`. 
+## Fork Info
+This repo is an aggregator, I added to it several commits from other forks also some modifications I believe are valuable. A list can be found in `CHANGES.md`.
 
 ## What is µGUI?
 µGUI is a free and open source graphic library for embedded systems. It is platform-independent
@@ -31,7 +31,3 @@ use µGUI, only 3 requirements are necessary:
 * a C-function which is able to control pixels of the target display.
 * a C-function which is able to flush the framebuffer to the target display(See `CHANGES.md`).
 * integer types for the target platform have to be adjusted in ugui_config.h.
-
-## Modifications in this Fork
-
-See `CHANGES.md`.

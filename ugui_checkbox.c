@@ -84,14 +84,14 @@ UG_RESULT UG_CheckboxShow( UG_WINDOW* wnd, UG_U8 id )
 UG_RESULT UG_CheckboxHide( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
+   chb = (UG_CHECKBOX*)(obj->data);
 
-   btn->state &= ~CHB_STATE_PRESSED;
+   chb->state &= ~CHB_STATE_PRESSED;
    #ifdef UGUI_USE_TOUCH
    obj->touch_state = OBJ_TOUCH_STATE_INIT;
    #endif
@@ -105,13 +105,13 @@ UG_RESULT UG_CheckboxHide( UG_WINDOW* wnd, UG_U8 id )
 UG_RESULT UG_CheckboxSetCheched( UG_WINDOW* wnd, UG_U8 id, UG_U8 ch )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->checked = ch;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->checked = ch;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -121,13 +121,13 @@ UG_RESULT UG_CheckboxSetCheched( UG_WINDOW* wnd, UG_U8 id, UG_U8 ch )
 UG_RESULT UG_CheckboxSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->fc = fc;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->fc = fc;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -136,13 +136,13 @@ UG_RESULT UG_CheckboxSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc )
 UG_RESULT UG_CheckboxSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->bc = bc;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->bc = bc;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -151,13 +151,13 @@ UG_RESULT UG_CheckboxSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc )
 UG_RESULT UG_CheckboxSetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR afc )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->afc = afc;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->afc = afc;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -166,13 +166,13 @@ UG_RESULT UG_CheckboxSetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR a
 UG_RESULT UG_CheckboxSetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR abc )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->abc = abc;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->abc = abc;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -181,13 +181,13 @@ UG_RESULT UG_CheckboxSetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR a
 UG_RESULT UG_CheckboxSetText( UG_WINDOW* wnd, UG_U8 id, char* str )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->str = str;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->str = str;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -196,13 +196,13 @@ UG_RESULT UG_CheckboxSetText( UG_WINDOW* wnd, UG_U8 id, char* str )
 UG_RESULT UG_CheckboxSetFont( UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->font = font;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->font = font;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -259,13 +259,13 @@ UG_RESULT UG_CheckboxSetStyle( UG_WINDOW* wnd, UG_U8 id, UG_U8 style )
 UG_RESULT UG_CheckboxSetHSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 hs )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->h_space = hs;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->h_space = hs;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -274,13 +274,13 @@ UG_RESULT UG_CheckboxSetHSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 hs )
 UG_RESULT UG_CheckboxSetVSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 vs )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->v_space = vs;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->v_space = vs;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -289,13 +289,13 @@ UG_RESULT UG_CheckboxSetVSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 vs )
 UG_RESULT UG_CheckboxSetAlignment( UG_WINDOW* wnd, UG_U8 id, UG_U8 align )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj == NULL ) return UG_RESULT_FAIL;
 
-   btn = (UG_CHECKBOX*)(obj->data);
-   btn->align = align;
+   chb = (UG_CHECKBOX*)(obj->data);
+   chb->align = align;
    obj->state |= OBJ_STATE_UPDATE | OBJ_STATE_REDRAW;
 
    return UG_RESULT_OK;
@@ -304,14 +304,14 @@ UG_RESULT UG_CheckboxSetAlignment( UG_WINDOW* wnd, UG_U8 id, UG_U8 align )
 UG_U8 UG_CheckboxGetChecked( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_U8 c = 0;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      c = btn->checked;
+      chb = (UG_CHECKBOX*)(obj->data);
+      c = chb->checked;
    }
    return c;
 }
@@ -319,14 +319,14 @@ UG_U8 UG_CheckboxGetChecked( UG_WINDOW* wnd, UG_U8 id )
 UG_COLOR UG_CheckboxGetForeColor( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_COLOR c = C_BLACK;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      c = btn->fc;
+      chb = (UG_CHECKBOX*)(obj->data);
+      c = chb->fc;
    }
    return c;
 }
@@ -334,14 +334,14 @@ UG_COLOR UG_CheckboxGetForeColor( UG_WINDOW* wnd, UG_U8 id )
 UG_COLOR UG_CheckboxGetBackColor( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_COLOR c = C_BLACK;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      c = btn->bc;
+      chb = (UG_CHECKBOX*)(obj->data);
+      c = chb->bc;
    }
    return c;
 }
@@ -349,14 +349,14 @@ UG_COLOR UG_CheckboxGetBackColor( UG_WINDOW* wnd, UG_U8 id )
 UG_COLOR UG_CheckboxGetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_COLOR c = C_BLACK;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      c = btn->afc;
+      chb = (UG_CHECKBOX*)(obj->data);
+      c = chb->afc;
    }
    return c;
 }
@@ -364,14 +364,14 @@ UG_COLOR UG_CheckboxGetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id )
 UG_COLOR UG_CheckboxGetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_COLOR c = C_BLACK;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      c = btn->abc;
+      chb = (UG_CHECKBOX*)(obj->data);
+      c = chb->abc;
    }
    return c;
 }
@@ -379,14 +379,14 @@ UG_COLOR UG_CheckboxGetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id )
 char* UG_CheckboxGetText( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    char* str = NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      str = btn->str;
+      chb = (UG_CHECKBOX*)(obj->data);
+      str = chb->str;
    }
    return str;
 }
@@ -394,14 +394,14 @@ char* UG_CheckboxGetText( UG_WINDOW* wnd, UG_U8 id )
 UG_FONT* UG_CheckboxGetFont( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_FONT* font = NULL;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      font = (UG_FONT*)btn->font;
+      chb = (UG_CHECKBOX*)(obj->data);
+      font = (UG_FONT*)chb->font;
    }
    return font;
 }
@@ -409,14 +409,14 @@ UG_FONT* UG_CheckboxGetFont( UG_WINDOW* wnd, UG_U8 id )
 UG_U8 UG_CheckboxGetStyle( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_U8 style = 0;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      style = btn->style;
+      chb = (UG_CHECKBOX*)(obj->data);
+      style = chb->style;
    }
    return style;
 }
@@ -424,14 +424,14 @@ UG_U8 UG_CheckboxGetStyle( UG_WINDOW* wnd, UG_U8 id )
 UG_S8 UG_CheckboxGetHSpace( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_S8 hs = 0;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      hs = btn->h_space;
+      chb = (UG_CHECKBOX*)(obj->data);
+      hs = chb->h_space;
    }
    return hs;
 }
@@ -439,14 +439,14 @@ UG_S8 UG_CheckboxGetHSpace( UG_WINDOW* wnd, UG_U8 id )
 UG_S8 UG_CheckboxGetVSpace( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_S8 vs = 0;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      vs = btn->v_space;
+      chb = (UG_CHECKBOX*)(obj->data);
+      vs = chb->v_space;
    }
    return vs;
 }
@@ -454,14 +454,14 @@ UG_S8 UG_CheckboxGetVSpace( UG_WINDOW* wnd, UG_U8 id )
 UG_U8 UG_CheckboxGetAlignment( UG_WINDOW* wnd, UG_U8 id )
 {
    UG_OBJECT* obj=NULL;
-   UG_CHECKBOX* btn=NULL;
+   UG_CHECKBOX* chb=NULL;
    UG_U8 align = 0;
 
    obj = _UG_SearchObject( wnd, OBJ_TYPE_CHECKBOX, id );
    if ( obj != NULL )
    {
-      btn = (UG_CHECKBOX*)(obj->data);
-      align = btn->align;
+      chb = (UG_CHECKBOX*)(obj->data);
+      align = chb->align;
    }
    return align;
 }
@@ -558,10 +558,6 @@ static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
                UG_FillFrame(obj->a_abs.xs+d, obj->a_abs.ys+d, obj->a_abs.xe-d, obj->a_abs.ye-d, txt.bc);
 
             /* Draw Checkbox text */
-//             txt.a.xs = obj->a_abs.xs+d;
-//             txt.a.ys = obj->a_abs.ys+d;
-//             txt.a.xe = obj->a_abs.xe-d;
-//             txt.a.ye = obj->a_abs.ye-d;
             txt.a.xs = obj->a_abs.xs + d2 + 3*d;
             txt.a.ys = obj->a_abs.ys + d;
             txt.a.xe = obj->a_abs.xe;
@@ -577,7 +573,7 @@ static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             _UG_SendObjectPostrenderEvent(wnd, obj);
 #endif
          }
-         
+
          /* Draw Checkbox X */
          if (chb->checked)
          {    

@@ -8,6 +8,7 @@
 * Prefixed all defines with `UGUI_`
 * Touch support is optional using `UGUI_USE_TOUCH` define
 * Added `UGUI_USE_COLOR_BW` for monochromatic displays, also added theme support
+* Added X11 Simulator. Based on the fork https://github.com/MarioIvancic/UGUI
 
 # Commits added from other forks
 

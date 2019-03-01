@@ -10,7 +10,7 @@
 /* Enable color mode */
 // #define UGUI_USE_COLOR_RGB888   // RGB = 0xFF,0xFF,0xFF
 // #define UGUI_USE_COLOR_RGB565   // RGB = 0bRRRRRGGGGGGBBBBB
-#define UGUI_USE_COLOR_BW   // BW = 0x00|0xFF
+// #define UGUI_USE_COLOR_BW   // BW = 0x00|0xFF
 
 /* Enable Touch Support */
 // #define UGUI_USE_TOUCH
@@ -18,23 +18,23 @@
 /* Enable needed fonts */
 #define __UG_FONT_DATA const
 
-#define  UGUI_USE_FONT_4X6
-#define  UGUI_USE_FONT_5X8
-#define  UGUI_USE_FONT_5X12
-// #define  UGUI_USE_FONT_6X8
-// #define  UGUI_USE_FONT_6X10
-// #define  UGUI_USE_FONT_7X12
-// #define  UGUI_USE_FONT_8X8
-// #define  UGUI_USE_FONT_8X12_CYRILLIC
-// #define  UGUI_USE_FONT_8X12
-// #define  UGUI_USE_FONT_8X14
-// #define  UGUI_USE_FONT_10X16
-// #define  UGUI_USE_FONT_12X16
-// #define  UGUI_USE_FONT_12X20
-// #define  UGUI_USE_FONT_16X26
-// #define  UGUI_USE_FONT_22X36
-// #define  UGUI_USE_FONT_24X40
-// #define  UGUI_USE_FONT_32X53
+// #define UGUI_USE_FONT_4X6
+// #define UGUI_USE_FONT_5X8
+// #define UGUI_USE_FONT_5X12
+// #define UGUI_USE_FONT_6X8
+// #define UGUI_USE_FONT_6X10
+// #define UGUI_USE_FONT_7X12
+// #define UGUI_USE_FONT_8X8
+// #define UGUI_USE_FONT_8X12_CYRILLIC
+// #define UGUI_USE_FONT_8X12
+// #define UGUI_USE_FONT_8X14
+// #define UGUI_USE_FONT_10X16
+// #define UGUI_USE_FONT_12X16
+// #define UGUI_USE_FONT_12X20
+// #define UGUI_USE_FONT_16X26
+// #define UGUI_USE_FONT_22X36
+// #define UGUI_USE_FONT_24X40
+// #define UGUI_USE_FONT_32X53
 
 /* Feature enablers */
 // #define UGUI_USE_PRERENDER_EVENT

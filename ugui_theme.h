@@ -119,8 +119,8 @@
                                        /* Frame 2 */ \
                                        C_WHITE,      \
                                        C_WHITE,      \
-                                       C_WHITE,      \
-                                       C_WHITE
+                                       C_BLACK,      \
+                                       C_BLACK
 
 #define C_PAL_BUTTON_PRESSED           /* Frame 0 */ \
                                        C_BLACK,      \
@@ -128,13 +128,13 @@
                                        C_BLACK,      \
                                        C_BLACK,      \
                                        /* Frame 1 */ \
-                                       C_WHITE,      \
-                                       C_WHITE,      \
+                                       C_BLACK,      \
+                                       C_BLACK,      \
                                        C_WHITE,      \
                                        C_WHITE,      \
                                        /* Frame 2 */ \
-                                       C_WHITE,      \
-                                       C_WHITE,      \
+                                       C_BLACK,      \
+                                       C_BLACK,      \
                                        C_WHITE,      \
                                        C_WHITE
 #define C_PAL_BUTTON_RELEASED          C_PAL_WINDOW

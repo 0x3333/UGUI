@@ -19,6 +19,7 @@
 
 #include <stdlib.h>
 #include "ugui_config.h"
+#include "ugui_colors.h"
 #if !defined(UGUI_USE_CUSTOM_THEME)
 #include "ugui_theme.h"
 #else
@@ -40,6 +41,12 @@ typedef UG_U8                        UG_COLOR;
 #endif
 #if !defined(UGUI_USE_COLOR_RGB888) && !defined(UGUI_USE_COLOR_RGB565) && !defined(UGUI_USE_COLOR_BW)
 #error "You must define a color space!"
+#endif
+#if defined(UGUI_USE_COLOR_RGB888) && defined(UGUI_USE_COLOR_RGB565) || \
+      defined(UGUI_USE_COLOR_RGB888) && defined(UGUI_USE_COLOR_BW) || \
+      defined(UGUI_USE_COLOR_RGB565) && defined(UGUI_USE_COLOR_BW) || \
+      defined(UGUI_USE_COLOR_RGB888) && defined(UGUI_USE_COLOR_RGB565) && defined(UGUI_USE_COLOR_BW)
+#error "You must define only one color space!"
 #endif
 #if !defined(C_PAL_WINDOW)
 #error "You must define a theme!"
@@ -95,8 +102,7 @@ typedef UG_U8                        UG_COLOR;
 #define UG_RESULT_OK                                  0
 
 /* -------------------------------------------------------------------------------- */
-/* -- µGUI FONTS                                                                 -- */
-/* -- Source: http://www.mikrocontroller.net/user/show/benedikt                  -- */
+/* -- FONTS                                                                      -- */
 /* -------------------------------------------------------------------------------- */
 
 /* Font structures */
@@ -117,25 +123,73 @@ typedef struct
    UG_U8  *widths;
 } UG_FONT;
 
-#define UGUI_DECLARE_FONT(name, varPointer, bpp, width, height)   const UG_FONT name = { (UG_U8*) varPointer, bpp, width, height, 0, 255, NULL };
+#ifdef UGUI_USE_FONT_4X6
+extern const UG_FONT FONT_4X6;
+#endif
 
-#include "fonts/font_4x6.h"
-#include "fonts/font_5x8.h"
-#include "fonts/font_5x12.h"
-#include "fonts/font_6x8.h"
-#include "fonts/font_6x10.h"
-#include "fonts/font_7x12.h"
-#include "fonts/font_8x8.h"
-#include "fonts/font_8x12.h"
-#include "fonts/font_8x12_cyrillic.h"
-#include "fonts/font_8x14.h"
-#include "fonts/font_10x16.h"
-#include "fonts/font_12x16.h"
-#include "fonts/font_12x20.h"
-#include "fonts/font_16x26.h"
-#include "fonts/font_22x36.h"
-#include "fonts/font_24x40.h"
-#include "fonts/font_32x53.h"
+#ifdef UGUI_USE_FONT_5X8
+extern const UG_FONT FONT_5X8;
+#endif
+
+#ifdef UGUI_USE_FONT_5X12
+extern const UG_FONT FONT_5X12;
+#endif
+
+#ifdef UGUI_USE_FONT_6X8
+extern const UG_FONT FONT_6X8;
+#endif
+
+#ifdef UGUI_USE_FONT_6X10
+extern const UG_FONT FONT_6X10;
+#endif
+
+#ifdef UGUI_USE_FONT_7X12
+extern const UG_FONT FONT_7X12;
+#endif
+
+#ifdef UGUI_USE_FONT_8X8
+extern const UG_FONT FONT_8X8;
+#endif
+
+#ifdef UGUI_USE_FONT_8X12
+extern const UG_FONT FONT_8X12;
+#endif
+
+#ifdef UGUI_USE_FONT_8X12_CYRILLIC
+extern const UG_FONT FONT_8X12_CYRILLIC;
+#endif
+
+#ifdef UGUI_USE_FONT_8X14
+extern const UG_FONT FONT_8X14;
+#endif
+
+#ifdef UGUI_USE_FONT_10X16
+extern const UG_FONT FONT_10X16;
+#endif
+
+#ifdef UGUI_USE_FONT_12X16
+extern const UG_FONT FONT_12X16;
+#endif
+
+#ifdef UGUI_USE_FONT_12X20
+extern const UG_FONT FONT_12X20;
+#endif
+
+#ifdef UGUI_USE_FONT_16X26
+extern const UG_FONT FONT_16X26;
+#endif
+
+#ifdef UGUI_USE_FONT_22X36
+extern const UG_FONT FONT_22X36;
+#endif
+
+#ifdef UGUI_USE_FONT_24X40
+extern const UG_FONT FONT_24X40;
+#endif
+
+#ifdef UGUI_USE_FONT_32X53
+extern const UG_FONT FONT_32X53;
+#endif
 
 /* -------------------------------------------------------------------------------- */
 /* -- UNIVERSAL STRUCTURES                                                       -- */
@@ -242,15 +296,19 @@ struct S_OBJECT
 
 /* Standard object events */
 #define OBJ_EVENT_NONE                                0
-#define OBJ_EVENT_CLICKED                             1
+#ifdef UGUI_USE_TOUCH
+   #define OBJ_EVENT_CLICKED                          1
+#endif
 #ifdef UGUI_USE_PRERENDER_EVENT
-#define OBJ_EVENT_PRERENDER                           2
+   #define OBJ_EVENT_PRERENDER                        2
 #endif
 #ifdef UGUI_UGUI_USE_POSTRENDER_EVENT
-#define OBJ_EVENT_POSTRENDER                          3
+   #define OBJ_EVENT_POSTRENDER                       3
 #endif
-#define OBJ_EVENT_PRESSED                             4
-#define OBJ_EVENT_RELEASED                            5
+#ifdef UGUI_USE_TOUCH
+   #define OBJ_EVENT_PRESSED                          4
+   #define OBJ_EVENT_RELEASED                         5
+#endif
 
 /* Object states */
 #define OBJ_STATE_FREE                                (1<<0)
@@ -266,16 +324,16 @@ struct S_OBJECT
 #define OBJ_STATE_INIT                                (OBJ_STATE_FREE | OBJ_STATE_VALID)
 
 #ifdef UGUI_USE_TOUCH
-/* Object touch states */
-#define OBJ_TOUCH_STATE_CHANGED                       (1<<0)
-#define OBJ_TOUCH_STATE_PRESSED_ON_OBJECT             (1<<1)
-#define OBJ_TOUCH_STATE_PRESSED_OUTSIDE_OBJECT        (1<<2)
-#define OBJ_TOUCH_STATE_RELEASED_ON_OBJECT            (1<<3)
-#define OBJ_TOUCH_STATE_RELEASED_OUTSIDE_OBJECT       (1<<4)
-#define OBJ_TOUCH_STATE_IS_PRESSED_ON_OBJECT          (1<<5)
-#define OBJ_TOUCH_STATE_IS_PRESSED                    (1<<6)
-#define OBJ_TOUCH_STATE_CLICK_ON_OBJECT               (1<<7)
-#define OBJ_TOUCH_STATE_INIT                          0
+   /* Object touch states */
+   #define OBJ_TOUCH_STATE_CHANGED                    (1<<0)
+   #define OBJ_TOUCH_STATE_PRESSED_ON_OBJECT          (1<<1)
+   #define OBJ_TOUCH_STATE_PRESSED_OUTSIDE_OBJECT     (1<<2)
+   #define OBJ_TOUCH_STATE_RELEASED_ON_OBJECT         (1<<3)
+   #define OBJ_TOUCH_STATE_RELEASED_OUTSIDE_OBJECT    (1<<4)
+   #define OBJ_TOUCH_STATE_IS_PRESSED_ON_OBJECT       (1<<5)
+   #define OBJ_TOUCH_STATE_IS_PRESSED                 (1<<6)
+   #define OBJ_TOUCH_STATE_CLICK_ON_OBJECT            (1<<7)
+   #define OBJ_TOUCH_STATE_INIT                       0
 #endif
 
 /* -------------------------------------------------------------------------------- */
