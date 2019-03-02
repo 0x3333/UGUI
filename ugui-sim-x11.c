@@ -11,7 +11,7 @@
 #include <stdbool.h>
 
 #include "simulation.h"
-#include "../ugui.h"
+#include "ugui.h"
 
 #define WIDTH               320
 #define HEIGHT              100
@@ -222,5 +222,8 @@ static const char* event_type[] = {
 
 void decode_msg(UG_MESSAGE* msg)
 {
-    printf("%s %s for ID %d (SubId %d)\n", message_type[msg->type], event_type[msg->event], msg->id, msg->sub_id);
+    printf("%s %s for ID %d (SubId %d)\n", 
+        message_type[msg->type],
+        event_type[msg->event],
+        msg->id, msg->sub_id);
 }

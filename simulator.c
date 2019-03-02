@@ -5,7 +5,8 @@
 #include "ugui_button.h"
 #include "ugui_checkbox.h"
 #include "ugui_textbox.h"
-#include "sim/simulation.h"
+#include "ugui_image.h"
+#include "simulation.h"
 
 //Global Vars
 #define MAX_OBJS 5
@@ -13,7 +14,7 @@ UG_GUI ugui;
 UG_WINDOW wnd;
 UG_BUTTON btn;
 UG_CHECKBOX chb;
-UG_TEXT txt;
+UG_TEXTBOX txt;
 UG_OBJECT objs[MAX_OBJS];
 
 // Internal Functions
