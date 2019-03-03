@@ -19,13 +19,13 @@
                                        C_WHITE_39,   \
                                        C_WHITE_39,   \
                                        /* Frame 1 */ \
-                                       C_WHITE,      \
-                                       C_WHITE,      \
+                                       C_WHITE_89,   \
+                                       C_WHITE_89,   \
                                        C_WHITE_41,   \
                                        C_WHITE_41,   \
                                        /* Frame 2 */ \
-                                       C_WHITE_89,   \
-                                       C_WHITE_89,   \
+                                       C_WHITE,      \
+                                       C_WHITE,      \
                                        C_WHITE_63,   \
                                        C_WHITE_63
 

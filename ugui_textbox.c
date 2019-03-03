@@ -315,8 +315,8 @@ static void _UG_TextboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             obj->a_abs.ys = obj->a_rel.ys + a.ys;
             obj->a_abs.xe = obj->a_rel.xe + a.xs;
             obj->a_abs.ye = obj->a_rel.ye + a.ys;
-            if ( obj->a_abs.ye >= wnd->ye ) return;
-            if ( obj->a_abs.xe >= wnd->xe ) return;
+            if ( obj->a_abs.ye > wnd->ye ) return;
+            if ( obj->a_abs.xe > wnd->xe ) return;
 #ifdef UGUI_USE_PRERENDER_EVENT
             _UG_SendObjectPrerenderEvent(wnd, obj);
 #endif

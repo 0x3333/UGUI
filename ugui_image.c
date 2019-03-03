@@ -114,8 +114,8 @@ static void _UG_ImageUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             obj->a_abs.ys = obj->a_rel.ys + a.ys;
             obj->a_abs.xe = obj->a_rel.xs + ((UG_BMP*)img->img)->width + a.xs;
             obj->a_abs.ye = obj->a_rel.ys + ((UG_BMP*)img->img)->height + a.ys;
-            if ( obj->a_abs.ye >= wnd->ye ) return;
-            if ( obj->a_abs.xe >= wnd->xe ) return;
+            if ( obj->a_abs.ye > wnd->ye ) return;
+            if ( obj->a_abs.xe > wnd->xe ) return;
 
             /* Draw Image */
             if ( (img->img != NULL) && (img->type & IMG_TYPE_BMP) )
