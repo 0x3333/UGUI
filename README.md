@@ -32,7 +32,7 @@ consists of three files: **ugui.c**, **ugui.h** and **ugui_config.h**.
 * Prefixed all defines with `UGUI_`
 * Touch support is optional using `UGUI_USE_TOUCH` define
 * Added `UGUI_USE_COLOR_BW` for monochromatic displays, also added theme support
-* Added X11 Simulator. Based on the fork https://github.com/MarioIvancic/UGUI
+* Added X11 Simulator. Based on the fork https://github.com/MarioIvancic/UGUI. Tested only on MacOS 10.14.
 * Added Simulation config
 * Added Simulation example
 * Added Function to convert from RGB565 to RGB888
@@ -51,7 +51,6 @@ use µGUI, only 3 requirements are necessary:
 * integer types for the target platform have to be adjusted in ugui_config.h.
 
 ## Simulator Screenshots
-
 ![Alt text](/.github/simulator-rgb888-x2.png?raw=true "Multiplier 2X")
 ![Alt text](/.github/simulator-rgb888-x4.png?raw=true "Multiplier 2X")
 ![Alt text](/.github/simulator-bw-x4.png?raw=true "Multiplier 2X")
