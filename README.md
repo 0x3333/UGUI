@@ -1,7 +1,7 @@
 # Introduction
 
 ## Fork Info
-This repo is an aggregator, I added to it several commits from other forks also some modifications I believe are valuable. A list can be found in `CHANGES.md`.
+This repo has several changes from the original version. I added some commits from other forks, also I added some modifications I believe are valuable. A list can be found bellow.
 
 ## What is µGUI?
 µGUI is a free and open source graphic library for embedded systems. It is platform-independent
@@ -25,9 +25,33 @@ consists of three files: **ugui.c**, **ugui.h** and **ugui_config.h**.
 * can be easily ported to almost any microcontroller system
 * no risky dynamic memory allocation required
 
+## µGUI 0x3333 Fork Features
+* Fonts, Components, Colors have been externalized to a separated file
+* Pseudo Theme created(See `ugui_theme.h`)
+* Added `flush` function. In case the display driver uses Framebuffer, this function will be called after `UG_Update` is called
+* Prefixed all defines with `UGUI_`
+* Touch support is optional using `UGUI_USE_TOUCH` define
+* Added `UGUI_USE_COLOR_BW` for monochromatic displays, also added theme support
+* Added X11 Simulator. Based on the fork https://github.com/MarioIvancic/UGUI
+* Added Simulation config
+* Added Simulation example
+* Added Function to convert from RGB565 to RGB888
+* Added a check to UG_DrawRoundFrame, draw a rect frame in case radius 0
+
+# Commits added from other forks
+
+* https://github.com/stone-payments/UGUI/commit/a8e3da4e0ff2eb1c3c78e0d88a36ae825227726d
+    * Add const specifier for not changed variables
+
 ## µGUI Requirements
 µGUI is platform-independent, so there is no need to use a certain embedded system. In order to
 use µGUI, only 3 requirements are necessary:
 * a C-function which is able to control pixels of the target display.
-* a C-function which is able to flush the framebuffer to the target display(See `CHANGES.md`).
+* a C-function which is able to flush the framebuffer to the target display(See µGUI 0x3333 Fork Features above).
 * integer types for the target platform have to be adjusted in ugui_config.h.
+
+## Simulator Screenshots
+
+![Alt text](/.github/simulator-rgb888-x2.png?raw=true "Multiplier 2X")
+![Alt text](/.github/simulator-rgb888-x4.png?raw=true "Multiplier 2X")
+![Alt text](/.github/simulator-bw-x4.png?raw=true "Multiplier 2X")
