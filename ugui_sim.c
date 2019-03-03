@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "simulation.h"
+#include "ugui_sim.h"
 #include "ugui.h"
 #include "ugui_button.h"
 #include "ugui_checkbox.h"
 #include "ugui_textbox.h"
 #include "ugui_image.h"
+#include "ugui_progress.h"
 
 // Simulator Variables
 #define WIDTH               330
@@ -162,6 +163,8 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     UG_TextboxSetBackColor(&wnd, TXB_ID_3, C_PALE_TURQUOISE);
     #endif
     UG_TextboxShow(&wnd, TXB_ID_3);
+
+    // Image
 
     UG_WindowShow(&wnd);
 }

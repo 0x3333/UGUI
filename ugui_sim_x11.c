@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-#include "simulation.h"
+#include "ugui_sim.h"
 #include "ugui.h"
 
 #define BUFFER_SIZE         ((handle->simX * simCfg->screenMultiplier) * (handle->simY * simCfg->screenMultiplier)) * sizeof(UG_U32)

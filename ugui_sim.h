@@ -1,5 +1,5 @@
-#ifndef SIMULATION_H_
-#define SIMULATION_H_
+#ifndef UGUI_SIM_H_
+#define UGUI_SIM_H_
 
 typedef struct
 {
@@ -16,4 +16,4 @@ void GUI_Setup(void *pset, void *flush, int w, int h);
 
 void GUI_Process(void);
 
-#endif
+#endif // UGUI_SIM_H_

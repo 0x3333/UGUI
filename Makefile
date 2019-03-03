@@ -9,9 +9,9 @@ LDFLAGS = -L/opt/X11/lib -lX11
 
 DBGCFLAGS = $(CFLAGS) -g
 
-SRCS = ugui.c ugui_button.c ugui_checkbox.c ugui_image.c ugui_textbox.c simulator.c ugui-sim-x11.c
+SRCS = ugui.c ugui_button.c ugui_checkbox.c ugui_image.c ugui_textbox.c ugui_progress.c ugui_sim.c ugui_sim_x11.c
 OBJS = $(SRCS:.c=.o)
-OUT = ugui-sim-x11
+OUT = ugui_sim_x11
 
 BUILDDIR = build
 DBGDIR = $(BUILDDIR)/debug
