@@ -1,25 +1,62 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "simulation.h"
 #include "ugui.h"
 #include "ugui_button.h"
 #include "ugui_checkbox.h"
 #include "ugui_textbox.h"
 #include "ugui_image.h"
-#include "simulation.h"
 
-//Global Vars
-#define MAX_OBJS 5
+// Simulator Variables
+#define WIDTH               330
+#define HEIGHT              180
+#define SCREEN_MULTIPLIER   2
+#define SCREEN_MARGIN       15
+#define WINDOW_BACK_COLOR   0x00C0C0C0
+#define MAX_OBJS 15
+
+// Global Vars
+simcfg_t *simCfg;
+
 UG_GUI ugui;
 UG_WINDOW wnd;
-UG_BUTTON btn;
-UG_CHECKBOX chb;
-UG_TEXTBOX txt;
+UG_BUTTON btn0;
+UG_BUTTON btn1;
+UG_BUTTON btn2;
+UG_BUTTON btn3;
+UG_CHECKBOX chb0;
+UG_CHECKBOX chb1;
+UG_CHECKBOX chb2;
+UG_CHECKBOX chb3;
+UG_TEXTBOX txt0;
+UG_TEXTBOX txt1;
+UG_TEXTBOX txt2;
+UG_TEXTBOX txt3;
 UG_OBJECT objs[MAX_OBJS];
 
 // Internal Functions
 void windowHandler(UG_MESSAGE *msg);
 extern void decode_msg(UG_MESSAGE* msg);
+
+simcfg_t* GUI_SimCfg(void)
+{
+    simCfg = (simcfg_t *)malloc(sizeof(simcfg_t));
+    simCfg->width = WIDTH;
+    simCfg->height = HEIGHT;
+    simCfg->screenMultiplier = SCREEN_MULTIPLIER;
+    simCfg->screenMargin = SCREEN_MARGIN;
+    simCfg->windowBackColor = WINDOW_BACK_COLOR;
+    return simCfg;
+}
+
+#define INITIAL_MARGIN  3
+#define BTN_WIDTH       100
+#define BTN_HEIGHT      30
+#define CHB_WIDTH       100
+#define CHB_HEIGHT      14
+
+#define OBJ_Y(i)        BTN_HEIGHT*i+(INITIAL_MARGIN*(i+1))
 
 void GUI_Setup(void *pset, void *flush, int w, int h)
 {
@@ -33,21 +70,98 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     UG_WindowSetTitleTextFont (&wnd, &FONT_6X8);
     UG_WindowSetTitleText(&wnd, "App Title");
 
-    UG_ButtonCreate(&wnd, &btn, BTN_ID_0, UGUI_POS(3, 3, 40, 30));
+    // Buttons
+    UG_ButtonCreate(&wnd, &btn0, BTN_ID_0, UGUI_POS(INITIAL_MARGIN, OBJ_Y(0), BTN_WIDTH, BTN_HEIGHT));
     UG_ButtonSetFont(&wnd, BTN_ID_0, &FONT_6X8);
-    UG_ButtonSetText(&wnd, BTN_ID_0, "BTN");
+    UG_ButtonSetText(&wnd, BTN_ID_0, "Btn 3D");
+    UG_ButtonSetStyle(&wnd, BTN_ID_0, BTN_STYLE_3D);
     UG_ButtonShow(&wnd, BTN_ID_0);
 
-    UG_CheckboxCreate(&wnd, &chb, CHB_ID_0, UGUI_POS(46, 3, 40, 12));
+    UG_ButtonCreate(&wnd, &btn1, BTN_ID_1, UGUI_POS(INITIAL_MARGIN, OBJ_Y(1), BTN_WIDTH, BTN_HEIGHT));
+    UG_ButtonSetFont(&wnd, BTN_ID_1, &FONT_6X8);
+    UG_ButtonSetText(&wnd, BTN_ID_1, "Btn 2D T");
+    UG_ButtonSetStyle(&wnd, BTN_ID_1, BTN_STYLE_2D|BTN_STYLE_TOGGLE_COLORS);
+    UG_ButtonShow(&wnd, BTN_ID_1);
+
+    UG_ButtonCreate(&wnd, &btn2, BTN_ID_2, UGUI_POS(INITIAL_MARGIN, OBJ_Y(2), BTN_WIDTH, BTN_HEIGHT));
+    UG_ButtonSetFont(&wnd, BTN_ID_2, &FONT_6X8);
+    UG_ButtonSetText(&wnd, BTN_ID_2, "Btn 3D Alt");
+    UG_ButtonSetStyle(&wnd, BTN_ID_2, BTN_STYLE_3D|BTN_STYLE_USE_ALTERNATE_COLORS);
+    UG_ButtonSetAlternateForeColor(&wnd, BTN_ID_2, C_BLACK);
+    UG_ButtonSetAlternateBackColor(&wnd, BTN_ID_2, C_WHITE);
+    UG_ButtonShow(&wnd, BTN_ID_2);
+
+    UG_ButtonCreate(&wnd, &btn3, BTN_ID_3, UGUI_POS(INITIAL_MARGIN, OBJ_Y(3), BTN_WIDTH, BTN_HEIGHT));
+    UG_ButtonSetFont(&wnd, BTN_ID_3, &FONT_6X8);
+    UG_ButtonSetText(&wnd, BTN_ID_3, "Btn NoB");
+    UG_ButtonSetStyle(&wnd, BTN_ID_3, BTN_STYLE_NO_BORDERS|BTN_STYLE_TOGGLE_COLORS);
+    UG_ButtonShow(&wnd, BTN_ID_3);
+
+    // Checkboxes
+    UG_CheckboxCreate(&wnd, &chb0, CHB_ID_0, UGUI_POS(INITIAL_MARGIN*2+BTN_WIDTH, OBJ_Y(0)+7, CHB_WIDTH, CHB_HEIGHT));
     UG_CheckboxSetFont(&wnd, CHB_ID_0, &FONT_6X8);
     UG_CheckboxSetText(&wnd, CHB_ID_0, "CHB");
-    UG_CheckboxSetAlignment(&wnd, CHB_ID_0, ALIGN_CENTER_LEFT);
+    UG_CheckboxSetStyle(&wnd, CHB_ID_0, CHB_STYLE_3D);
+    UG_CheckboxSetAlignment(&wnd, CHB_ID_0, ALIGN_TOP_LEFT);
+    #if !defined(UGUI_USE_COLOR_BW)
+    UG_CheckboxSetBackColor(&wnd, CHB_ID_0, C_PALE_TURQUOISE);
+    #endif
     UG_CheckboxShow(&wnd, CHB_ID_0);
 
-    UG_TextboxCreate(&wnd, &txt, TXB_ID_0, UGUI_POS(89, 3, 100, 30));
-    UG_TextboxSetFont(&wnd, TXB_ID_0, &FONT_16X26);
-    UG_TextboxSetText(&wnd, TXB_ID_0, "TXT");
+    UG_CheckboxCreate(&wnd, &chb1, CHB_ID_1, UGUI_POS(INITIAL_MARGIN*2+BTN_WIDTH, OBJ_Y(1)+7, CHB_WIDTH, CHB_HEIGHT));
+    UG_CheckboxSetFont(&wnd, CHB_ID_1, &FONT_6X8);
+    UG_CheckboxSetText(&wnd, CHB_ID_1, "CHB");
+    UG_CheckboxSetStyle(&wnd, CHB_ID_1, CHB_STYLE_2D|CHB_STYLE_TOGGLE_COLORS);
+    UG_CheckboxSetAlignment(&wnd, CHB_ID_1, ALIGN_CENTER);
+    UG_CheckboxShow(&wnd, CHB_ID_1);
+
+    UG_CheckboxCreate(&wnd, &chb2, CHB_ID_2, UGUI_POS(INITIAL_MARGIN*2+BTN_WIDTH, OBJ_Y(2)+7, CHB_WIDTH, CHB_HEIGHT));
+    UG_CheckboxSetFont(&wnd, CHB_ID_2, &FONT_6X8);
+    UG_CheckboxSetText(&wnd, CHB_ID_2, "CHB");
+    UG_CheckboxSetStyle(&wnd, CHB_ID_2, CHB_STYLE_3D|CHB_STYLE_USE_ALTERNATE_COLORS);
+    UG_CheckboxSetAlignment(&wnd, CHB_ID_2, ALIGN_BOTTOM_LEFT);
+    UG_CheckboxShow(&wnd, CHB_ID_2);
+
+    UG_CheckboxCreate(&wnd, &chb3, CHB_ID_3, UGUI_POS(INITIAL_MARGIN*2+BTN_WIDTH, OBJ_Y(3)+7, CHB_WIDTH, CHB_HEIGHT));
+    UG_CheckboxSetFont(&wnd, CHB_ID_3, &FONT_6X8);
+    UG_CheckboxSetText(&wnd, CHB_ID_3, "CHB");
+    UG_CheckboxSetStyle(&wnd, CHB_ID_3, CHB_STYLE_NO_BORDERS|CHB_STYLE_TOGGLE_COLORS);
+    UG_CheckboxSetAlignment(&wnd, CHB_ID_3, ALIGN_BOTTOM_RIGHT);
+    UG_CheckboxShow(&wnd, CHB_ID_3);
+
+    // Texts
+    UG_TextboxCreate(&wnd, &txt0, TXB_ID_0, UGUI_POS(INITIAL_MARGIN*3+BTN_WIDTH+CHB_WIDTH, OBJ_Y(0), 100, 15));
+    UG_TextboxSetFont(&wnd, TXB_ID_0, &FONT_4X6);
+    UG_TextboxSetText(&wnd, TXB_ID_0, "Small TEXT");
+    #if !defined(UGUI_USE_COLOR_BW)
+    UG_TextboxSetBackColor(&wnd, TXB_ID_0, C_PALE_TURQUOISE);
+    #endif
     UG_TextboxShow(&wnd, TXB_ID_0);
+
+    UG_TextboxCreate(&wnd, &txt1, TXB_ID_1, UGUI_POS(INITIAL_MARGIN*3+BTN_WIDTH+CHB_WIDTH, OBJ_Y(1)-15, 100, 30));
+    UG_TextboxSetFont(&wnd, TXB_ID_1, &FONT_12X20);
+    UG_TextboxSetText(&wnd, TXB_ID_1, "Text");
+    #if !defined(UGUI_USE_COLOR_BW)
+    UG_TextboxSetBackColor(&wnd, TXB_ID_1, C_PALE_TURQUOISE);
+    #endif
+    UG_TextboxSetAlignment(&wnd, TXB_ID_1, ALIGN_TOP_RIGHT);
+    UG_TextboxShow(&wnd, TXB_ID_1);
+
+    UG_TextboxCreate(&wnd, &txt2, TXB_ID_2, UGUI_POS(INITIAL_MARGIN*3+BTN_WIDTH+CHB_WIDTH, OBJ_Y(2)-15, 100, 45));
+    UG_TextboxSetFont(&wnd, TXB_ID_2, &FONT_24X40);
+    UG_TextboxSetText(&wnd, TXB_ID_2, "Text");
+    #if !defined(UGUI_USE_COLOR_BW)
+    UG_TextboxSetBackColor(&wnd, TXB_ID_2, C_PALE_TURQUOISE);
+    #endif
+    UG_TextboxShow(&wnd, TXB_ID_2);
+
+    UG_TextboxCreate(&wnd, &txt3, TXB_ID_3, UGUI_POS(INITIAL_MARGIN*3+BTN_WIDTH+CHB_WIDTH, OBJ_Y(3), 100, 53));
+    UG_TextboxSetFont(&wnd, TXB_ID_3, &FONT_32X53);
+    UG_TextboxSetText(&wnd, TXB_ID_3, "ABC");
+    #if !defined(UGUI_USE_COLOR_BW)
+    UG_TextboxSetBackColor(&wnd, TXB_ID_3, C_PALE_TURQUOISE);
+    #endif
+    UG_TextboxShow(&wnd, TXB_ID_3);
 
     UG_WindowShow(&wnd);
 }

@@ -501,6 +501,7 @@ void _UG_SendObjectPrerenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj);
 #ifdef UGUI_USE_POSTRENDER_EVENT
 void _UG_SendObjectPostrenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj);
 #endif
+UG_U32 _UG_ConvertRGB565ToRGB888(UG_U16 rgb565);
 
 /* Window functions */
 UG_RESULT UG_WindowCreate( UG_WINDOW* wnd, UG_OBJECT* objlst, UG_U8 objcnt, void (*cb)( UG_MESSAGE* ) );

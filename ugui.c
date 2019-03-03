@@ -204,6 +204,12 @@ void UG_DrawFrame( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c )
 
 void UG_DrawRoundFrame( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_S16 r, UG_COLOR c )
 {
+   if(r == 0)
+   {
+      UG_DrawFrame(x1, y1, x2, y2, c);
+      return;
+   }
+
    UG_S16 n;
    if ( x2 < x1 )
    {
@@ -1005,6 +1011,23 @@ void _UG_SendObjectPostrenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj)
 }
 #endif
 
+UG_U32 _UG_ConvertRGB565ToRGB888(UG_U16 rgb565)
+{
+   UG_U32 rgb888;
+   UG_U8 r,g,b;
+
+   r = (rgb565>>11)&0x1F;
+   r<<=3;
+   g = (rgb565>>5)&0x3F;
+   g<<=2;
+   b = (rgb565)&0x1F;
+   b<<=3;
+
+   rgb888 = ((UG_U32)r<<16) | ((UG_U32)g<<8) | (UG_U32)b;
+
+   return rgb888;
+}
+
 /* -------------------------------------------------------------------------------- */
 /* -- DRIVER FUNCTIONS                                                           -- */
 /* -------------------------------------------------------------------------------- */
@@ -1131,14 +1154,9 @@ void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp )
       for(x=0;x<bmp->width;x++)
       {
          tmp = *p++;
-         /* Convert RGB565 to RGB888 */
-         r = (tmp>>11)&0x1F;
-         r<<=3;
-         g = (tmp>>5)&0x3F;
-         g<<=2;
-         b = (tmp)&0x1F;
-         b<<=3;
-         c = ((UG_COLOR)r<<16) | ((UG_COLOR)g<<8) | (UG_COLOR)b;
+         #if defined(UGUI_USE_COLOR_RGB888)
+         c =_UG_ConvertRGB565ToRGB888(tmp);
+         #endif
          UG_DrawPixel( xp++ , yp , c );
       }
       yp++;
