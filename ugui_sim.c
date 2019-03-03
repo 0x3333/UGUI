@@ -76,13 +76,11 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     UG_ButtonSetFont(&wnd, BTN_ID_0, &FONT_6X8);
     UG_ButtonSetText(&wnd, BTN_ID_0, "Btn 3D");
     UG_ButtonSetStyle(&wnd, BTN_ID_0, BTN_STYLE_3D);
-    UG_ButtonShow(&wnd, BTN_ID_0);
 
     UG_ButtonCreate(&wnd, &btn1, BTN_ID_1, UGUI_POS(INITIAL_MARGIN, OBJ_Y(1), BTN_WIDTH, BTN_HEIGHT));
     UG_ButtonSetFont(&wnd, BTN_ID_1, &FONT_6X8);
     UG_ButtonSetText(&wnd, BTN_ID_1, "Btn 2D T");
     UG_ButtonSetStyle(&wnd, BTN_ID_1, BTN_STYLE_2D|BTN_STYLE_TOGGLE_COLORS);
-    UG_ButtonShow(&wnd, BTN_ID_1);
 
     UG_ButtonCreate(&wnd, &btn2, BTN_ID_2, UGUI_POS(INITIAL_MARGIN, OBJ_Y(2), BTN_WIDTH, BTN_HEIGHT));
     UG_ButtonSetFont(&wnd, BTN_ID_2, &FONT_6X8);
@@ -90,13 +88,11 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     UG_ButtonSetStyle(&wnd, BTN_ID_2, BTN_STYLE_3D|BTN_STYLE_USE_ALTERNATE_COLORS);
     UG_ButtonSetAlternateForeColor(&wnd, BTN_ID_2, C_BLACK);
     UG_ButtonSetAlternateBackColor(&wnd, BTN_ID_2, C_WHITE);
-    UG_ButtonShow(&wnd, BTN_ID_2);
 
     UG_ButtonCreate(&wnd, &btn3, BTN_ID_3, UGUI_POS(INITIAL_MARGIN, OBJ_Y(3), BTN_WIDTH, BTN_HEIGHT));
     UG_ButtonSetFont(&wnd, BTN_ID_3, &FONT_6X8);
     UG_ButtonSetText(&wnd, BTN_ID_3, "Btn NoB");
     UG_ButtonSetStyle(&wnd, BTN_ID_3, BTN_STYLE_NO_BORDERS|BTN_STYLE_TOGGLE_COLORS);
-    UG_ButtonShow(&wnd, BTN_ID_3);
 
     // Checkboxes
     UG_CheckboxCreate(&wnd, &chb0, CHB_ID_0, UGUI_POS(INITIAL_MARGIN*2+BTN_WIDTH, OBJ_Y(0)+7, CHB_WIDTH, CHB_HEIGHT));
@@ -107,7 +103,6 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     #if !defined(UGUI_USE_COLOR_BW)
     UG_CheckboxSetBackColor(&wnd, CHB_ID_0, C_PALE_TURQUOISE);
     #endif
-    UG_CheckboxShow(&wnd, CHB_ID_0);
 
     UG_CheckboxCreate(&wnd, &chb1, CHB_ID_1, UGUI_POS(INITIAL_MARGIN*2+BTN_WIDTH, OBJ_Y(1)+7, CHB_WIDTH, CHB_HEIGHT));
     UG_CheckboxSetFont(&wnd, CHB_ID_1, &FONT_6X8);
@@ -137,7 +132,6 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     #if !defined(UGUI_USE_COLOR_BW)
     UG_TextboxSetBackColor(&wnd, TXB_ID_0, C_PALE_TURQUOISE);
     #endif
-    UG_TextboxShow(&wnd, TXB_ID_0);
 
     UG_TextboxCreate(&wnd, &txt1, TXB_ID_1, UGUI_POS(INITIAL_MARGIN*3+BTN_WIDTH+CHB_WIDTH, OBJ_Y(1)-15, 100, 30));
     UG_TextboxSetFont(&wnd, TXB_ID_1, &FONT_12X20);
@@ -146,7 +140,6 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     UG_TextboxSetBackColor(&wnd, TXB_ID_1, C_PALE_TURQUOISE);
     #endif
     UG_TextboxSetAlignment(&wnd, TXB_ID_1, ALIGN_TOP_RIGHT);
-    UG_TextboxShow(&wnd, TXB_ID_1);
 
     UG_TextboxCreate(&wnd, &txt2, TXB_ID_2, UGUI_POS(INITIAL_MARGIN*3+BTN_WIDTH+CHB_WIDTH, OBJ_Y(2)-15, 100, 45));
     UG_TextboxSetFont(&wnd, TXB_ID_2, &FONT_24X40);
@@ -154,7 +147,6 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     #if !defined(UGUI_USE_COLOR_BW)
     UG_TextboxSetBackColor(&wnd, TXB_ID_2, C_PALE_TURQUOISE);
     #endif
-    UG_TextboxShow(&wnd, TXB_ID_2);
 
     UG_TextboxCreate(&wnd, &txt3, TXB_ID_3, UGUI_POS(INITIAL_MARGIN*3+BTN_WIDTH+CHB_WIDTH, OBJ_Y(3), 100, 53));
     UG_TextboxSetFont(&wnd, TXB_ID_3, &FONT_32X53);
@@ -162,9 +154,6 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     #if !defined(UGUI_USE_COLOR_BW)
     UG_TextboxSetBackColor(&wnd, TXB_ID_3, C_PALE_TURQUOISE);
     #endif
-    UG_TextboxShow(&wnd, TXB_ID_3);
-
-    // Image
 
     UG_WindowShow(&wnd);
 }
@@ -183,7 +172,6 @@ void windowHandler(UG_MESSAGE *msg)
     #if defined(UGUI_USE_TOUCH)
     if((msg->event == OBJ_EVENT_CLICKED) && (msg->type == MSG_TYPE_OBJECT))
     {
-        //UG_OBJECT* obj = UG_FindObject(&wnd, msg->sub_id);
         UG_OBJECT* obj = *(UG_OBJECT**) msg->src;
         if(obj)
         {

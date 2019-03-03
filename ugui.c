@@ -1131,7 +1131,7 @@ void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp )
 {
    UG_S16 x,y,xs;
    UG_U8 r,g,b;
-   UG_U16* p;
+   UG_U16 *p;
    UG_U16 tmp;
    UG_COLOR c;
 
