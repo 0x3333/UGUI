@@ -51,6 +51,6 @@ use µGUI, only 3 requirements are necessary:
 * integer types for the target platform have to be adjusted in ugui_config.h.
 
 ## Simulator Screenshots
-![Alt text](/.github/simulator-rgb888-x2.png?raw=true "Multiplier 2X")
-![Alt text](/.github/simulator-rgb888-x4.png?raw=true "Multiplier 2X")
-![Alt text](/.github/simulator-bw-x4.png?raw=true "Multiplier 2X")
+![Alt text](/.github/simulator-rgb888-x2.jpg?raw=true "Multiplier 2X")
+![Alt text](/.github/simulator-rgb888-x4.jpg?raw=true "Multiplier 2X")
+![Alt text](/.github/simulator-bw-x4.jpg?raw=true "Multiplier 2X")
