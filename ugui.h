@@ -486,7 +486,7 @@ void UG_DriverEnable( UG_U8 type );
 void UG_DriverDisable( UG_U8 type );
 
 /* Internal API functions */
-void _UG_PutText(UG_TEXT* txt);
+void _UG_PutText( UG_TEXT* txt );
 UG_OBJECT* _UG_SearchObject( UG_WINDOW* wnd, UG_U8 type, UG_U8 id );
 void _UG_DrawObjectFrame( UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye, UG_COLOR* p );
 UG_OBJECT* _UG_GetFreeObject( UG_WINDOW* wnd );

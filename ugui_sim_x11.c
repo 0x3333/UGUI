@@ -56,6 +56,7 @@ void handler(int sig) {
 int main (void)
 {
     signal(SIGSEGV, handler);   // install our handler
+    signal(SIGBUS, handler);   // install our handler
 
     printf("Simulation Application\n");
 

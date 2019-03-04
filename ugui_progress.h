@@ -45,6 +45,7 @@ typedef struct
 #define PGB_STYLE_3D                                  (1<<0)
 #define PGB_STYLE_NO_BORDERS                          (1<<1)
 #define PGB_STYLE_FORE_COLOR_MESH                     (1<<2)
+#define PGB_STYLE_NO_FILL                             (1<<3)
 
 /* Progress Bar functions */
 UG_RESULT UG_ProgressCreate( UG_WINDOW* wnd, UG_PROGRESS* pgb, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );

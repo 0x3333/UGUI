@@ -426,13 +426,13 @@ void UG_PutString( UG_S16 x, UG_S16 y, const char* str )
    while ( *str != 0 )
    {
       chr = *str++;
-	  if (chr < gui->font.start_char || chr > gui->font.end_char) continue;
+     if (chr < gui->font.start_char || chr > gui->font.end_char) continue;
       if ( chr == '\n' )
       {
          xp = gui->x_dim;
          continue;
       }
-	  cw = gui->font.widths ? gui->font.widths[chr - gui->font.start_char] : gui->font.char_width;
+     cw = gui->font.widths ? gui->font.widths[chr - gui->font.start_char] : gui->font.char_width;
 
       if ( xp + cw > gui->x_dim - 1 )
       {
@@ -448,7 +448,7 @@ void UG_PutString( UG_S16 x, UG_S16 y, const char* str )
 
 void UG_PutChar( const char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc )
 {
-	_UG_PutChar(chr,x,y,fc,bc,&gui->font);
+   _UG_PutChar(chr,x,y,fc,bc,&gui->font);
 }
 
 void UG_ConsolePutString( const char* str )
@@ -537,7 +537,7 @@ void UG_FontSetVSpace( UG_U16 s )
 /* -------------------------------------------------------------------------------- */
 /* -- INTERNAL FUNCTIONS                                                         -- */
 /* -------------------------------------------------------------------------------- */
-static void _UG_PutChar( const char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const UG_FONT* font)
+static void _UG_PutChar( const char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const UG_FONT* font )
 {
    UG_U16 i,j,k,xo,yo,c,bn,actual_char_width;
    UG_U8 b,bt;
@@ -573,58 +573,57 @@ static void _UG_PutChar( const char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COL
    /* Is hardware acceleration available? */
    if ( gui->driver[DRIVER_FILL_AREA].state & DRIVER_ENABLED )
    {
-	   //(void(*)(UG_COLOR))
       push_pixel = ((void*(*)(UG_S16, UG_S16, UG_S16, UG_S16))gui->driver[DRIVER_FILL_AREA].driver)(x,y,x+actual_char_width-1,y+font->char_height-1);
-	   
+      
       if (font->font_type == FONT_TYPE_1BPP)
-	   {
-	      index = (bt - font->start_char)* font->char_height * bn;
-		  for( j=0;j<font->char_height;j++ )
-		  {
-			 c=actual_char_width;
-			 for( i=0;i<bn;i++ )
-			 {
-				b = font->p[index++];
-				for( k=0;(k<8) && c;k++ )
-				{
-				   if( b & 0x01 )
-				   {
-					  push_pixel(fc);
-				   }
-				   else
-				   {
-					  push_pixel(bc);
-				   }
-				   b >>= 1;
-				   c--;
-				}
-			 }
-	 	 }
-	  }
+      {
+         index = (bt - font->start_char)* font->char_height * bn;
+        for( j=0;j<font->char_height;j++ )
+        {
+          c=actual_char_width;
+          for( i=0;i<bn;i++ )
+          {
+            b = font->p[index++];
+            for( k=0;(k<8) && c;k++ )
+            {
+               if( b & 0x01 )
+               {
+                 push_pixel(fc);
+               }
+               else
+               {
+                 push_pixel(bc);
+               }
+               b >>= 1;
+               c--;
+            }
+          }
+        }
+     }
      #if defined(UGUI_USE_COLOR_RGB888) || defined(UGUI_USE_COLOR_RGB565)
-	  else if (font->font_type == FONT_TYPE_8BPP)
-	  {
-		   index = (bt - font->start_char)* font->char_height * font->char_width;
-		   for( j=0;j<font->char_height;j++ )
-		   {
-			  for( i=0;i<actual_char_width;i++ )
-			  {
-				 b = font->p[index++];
-				 color = ((((fc & 0xFF) * b + (bc & 0xFF) * (256 - b)) >> 8) & 0xFF) | //Blue component
-				         ((((fc & 0xFF00) * b + (bc & 0xFF00) * (256 - b)) >> 8)  & 0xFF00) | //Green component
-				         ((((fc & 0xFF0000) * b + (bc & 0xFF0000) * (256 - b)) >> 8) & 0xFF0000); //Red component
-				 push_pixel(color);
-			  }
-			  index += font->char_width - actual_char_width;
-		  }
-	  }
+     else if (font->font_type == FONT_TYPE_8BPP)
+     {
+         index = (bt - font->start_char)* font->char_height * font->char_width;
+         for( j=0;j<font->char_height;j++ )
+         {
+           for( i=0;i<actual_char_width;i++ )
+           {
+             b = font->p[index++];
+             color = ((((fc & 0xFF) * b + (bc & 0xFF) * (256 - b)) >> 8) & 0xFF) | //Blue component
+                     ((((fc & 0xFF00) * b + (bc & 0xFF00) * (256 - b)) >> 8)  & 0xFF00) | //Green component
+                     ((((fc & 0xFF0000) * b + (bc & 0xFF0000) * (256 - b)) >> 8) & 0xFF0000); //Red component
+             push_pixel(color);
+           }
+           index += font->char_width - actual_char_width;
+        }
+     }
      #endif
    }
    else
    {
-	   /*Not accelerated output*/
-	   if (font->font_type == FONT_TYPE_1BPP)
-	   {
+      /*Not accelerated output*/
+      if (font->font_type == FONT_TYPE_1BPP)
+      {
          index = (bt - font->start_char)* font->char_height * bn;
          for( j=0;j<font->char_height;j++ )
          {
@@ -795,7 +794,6 @@ static void _UG_HandleEvents( UG_WINDOW* wnd )
 
    /* Handle window-related events */
    //ToDo
-
 
    /* Handle object-related events */
    msg.type = MSG_TYPE_OBJECT;
@@ -985,28 +983,28 @@ UG_RESULT _UG_DeleteObject( UG_WINDOW* wnd, UG_U8 type, UG_U8 id )
 #ifdef UGUI_USE_PRERENDER_EVENT
 void _UG_SendObjectPrerenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj)
 {
-	UG_MESSAGE msg;
-	msg.event = OBJ_EVENT_PRERENDER;
-	msg.type = MSG_TYPE_OBJECT;
-	msg.id = obj->type;
-	msg.sub_id = obj->id;
-	msg.src = obj;
+   UG_MESSAGE msg;
+   msg.event = OBJ_EVENT_PRERENDER;
+   msg.type = MSG_TYPE_OBJECT;
+   msg.id = obj->type;
+   msg.sub_id = obj->id;
+   msg.src = obj;
 
-	wnd->cb(&msg);
+   wnd->cb(&msg);
 }
 #endif
 
 #ifdef UGUI_USE_POSTRENDER_EVENT
 void _UG_SendObjectPostrenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj)
 {
-	UG_MESSAGE msg;
-	msg.event = OBJ_EVENT_POSTRENDER;
-	msg.type = MSG_TYPE_OBJECT;
-	msg.id = obj->type;
-	msg.sub_id = obj->id;
-	msg.src = obj;
+   UG_MESSAGE msg;
+   msg.event = OBJ_EVENT_POSTRENDER;
+   msg.type = MSG_TYPE_OBJECT;
+   msg.id = obj->type;
+   msg.sub_id = obj->id;
+   msg.src = obj;
 
-	wnd->cb(&msg);
+   wnd->cb(&msg);
 }
 #endif
 
@@ -1129,7 +1127,6 @@ void UG_WaitForUpdate( void )
 void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp )
 {
    UG_S16 x,y,xs;
-   UG_U8 r,g,b;
    UG_U16 *p;
    UG_U16 tmp;
    UG_COLOR c;

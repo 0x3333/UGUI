@@ -117,8 +117,7 @@ UG_RESULT UG_ProgressSetStyle( UG_WINDOW* wnd, UG_U8 id, UG_U8 style )
 
    pgb = (UG_PROGRESS*)(obj->data);
 
-   /* Select color scheme */
-   pgb->style &= ~(PGB_STYLE_NO_BORDERS | PGB_STYLE_FORE_COLOR_MESH);
+   pgb->style &= ~(PGB_STYLE_NO_BORDERS | PGB_STYLE_FORE_COLOR_MESH | PGB_STYLE_NO_FILL);
    if ( style & PGB_STYLE_NO_BORDERS )
    {
       pgb->style |= PGB_STYLE_NO_BORDERS;
@@ -126,6 +125,10 @@ UG_RESULT UG_ProgressSetStyle( UG_WINDOW* wnd, UG_U8 id, UG_U8 style )
    if ( style & PGB_STYLE_FORE_COLOR_MESH )
    {
       pgb->style |= PGB_STYLE_FORE_COLOR_MESH;
+   }
+   if ( style & PGB_STYLE_NO_FILL )
+   {
+      pgb->style |= PGB_STYLE_NO_FILL;
    }
 
    /* 3D or 2D */
@@ -154,9 +157,13 @@ UG_RESULT UG_ProgressSetProgress( UG_WINDOW* wnd, UG_U8 id, UG_U8 progress )
 
    pgb = (UG_PROGRESS*)(obj->data);
 
-   // Only redraw if new progress is less then actual(Need to redraw the background)
-   obj->state |= OBJ_STATE_UPDATE | ((progress < pgb->progress) ? OBJ_STATE_REDRAW : 0);
-   pgb->progress = progress;
+   // Only update if different
+   if(progress != pgb->progress)
+   {
+      // Only redraw if new progress is less then actual(Need to redraw the background)
+      obj->state |= OBJ_STATE_UPDATE | ((progress < pgb->progress) ? OBJ_STATE_REDRAW : 0);
+      pgb->progress = progress;
+   }
 
    return UG_RESULT_OK;
 }
@@ -225,7 +232,6 @@ static void _UG_ProgressUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
 {
    UG_PROGRESS* pgb;
    UG_AREA a;
-   UG_TEXT txt;
    UG_U8 d;
    UG_S16 w, wps, wpe;
 
@@ -261,20 +267,21 @@ static void _UG_ProgressUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
                if ( pgb->style & PGB_STYLE_3D )
                {  /* 3D */
                   _UG_DrawObjectFrame(obj->a_abs.xs, obj->a_abs.ys, obj->a_abs.xe, obj->a_abs.ye, (UG_COLOR*)pal_progress);
+                  d = 3;
                }
                else
                {  /* 2D */
-                  UG_DrawFrame(obj->a_abs.xs, obj->a_abs.ys, obj->a_abs.xe, obj->a_abs.ye, pgb->bc);
+                  UG_DrawFrame(obj->a_abs.xs, obj->a_abs.ys, obj->a_abs.xe, obj->a_abs.ye, pgb->fc);
+                  d = 1;
                }
-               d = ( pgb->style & PGB_STYLE_3D ) ? 3 : 1;
             }
             
             w   = ((obj->a_abs.xe-d)-(obj->a_abs.xs+d));
             wps = w * pgb->progress / 100;
             wpe = w - wps;
 
-            // Cleanup
-            UG_FillFrame(obj->a_abs.xs+d, obj->a_abs.ys+d, obj->a_abs.xe-d, obj->a_abs.ye-d, wnd->bc);
+            if ( !(pgb->style & PGB_STYLE_NO_FILL) )
+               UG_FillFrame(obj->a_abs.xs+d, obj->a_abs.ys+d, obj->a_abs.xe-d, obj->a_abs.ye-d, wnd->bc);
 
             // Draw remaing frame first
             if(wpe > 0)
@@ -284,6 +291,7 @@ static void _UG_ProgressUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
                
                if ( pgb->style & PGB_STYLE_FORE_COLOR_MESH )
                {
+                  // FIXME: Need fix, if start at 0, it is shifted 1 pixel right.
                   // Needed to match mesh pattern, otherwise it would "scroll right" 
                   if((((obj->a_abs.xs+d) & 1) && (wps & 1)) || (!((obj->a_abs.xs+d) & 1) && !(wps & 1)))
                      xs++;
@@ -307,11 +315,8 @@ static void _UG_ProgressUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
       }
       else
       {
-         // Draw elapsed frame
-         if(pgb->progress > 0)
-         {
-            UG_FillFrame(obj->a_abs.xs+d, obj->a_abs.ys+d, obj->a_abs.xs+d+wps, obj->a_abs.ye-d, pgb->fc);
-         }
+         if ( !(pgb->style & PGB_STYLE_NO_FILL) )
+            UG_FillFrame(obj->a_abs.xs+d, obj->a_abs.ys+d, obj->a_abs.xe-d, obj->a_abs.ye-d, wnd->bc);
       }
       obj->state &= ~OBJ_STATE_UPDATE;
    }
