@@ -11,7 +11,7 @@
 
 // Simulator Variables
 #define WIDTH               330
-#define HEIGHT              180
+#define HEIGHT              250
 #define SCREEN_MULTIPLIER   2
 #define SCREEN_MARGIN       15
 #define WINDOW_BACK_COLOR   0x00C0C0C0
@@ -34,6 +34,8 @@ UG_TEXTBOX txt0;
 UG_TEXTBOX txt1;
 UG_TEXTBOX txt2;
 UG_TEXTBOX txt3;
+UG_PROGRESS pgb0;
+UG_PROGRESS pgb1;
 UG_OBJECT objs[MAX_OBJS];
 
 // Internal Functions
@@ -155,6 +157,14 @@ void GUI_Setup(void *pset, void *flush, int w, int h)
     UG_TextboxSetBackColor(&wnd, TXB_ID_3, C_PALE_TURQUOISE);
     #endif
 
+    // Progress Bar
+    UG_ProgressCreate(&wnd, &pgb0, PGB_ID_0, UGUI_POS(INITIAL_MARGIN, OBJ_Y(4)+20, 157, 20));
+    UG_ProgressSetProgress(&wnd, PGB_ID_0, 35);
+
+    UG_ProgressCreate(&wnd, &pgb1, PGB_ID_1, UGUI_POS(159+INITIAL_MARGIN*2, OBJ_Y(4)+25, 156, 10));
+    UG_ProgressSetStyle(&wnd, PGB_ID_1, PGB_STYLE_2D | PGB_STYLE_FORE_COLOR_MESH);
+    UG_ProgressSetProgress(&wnd, PGB_ID_1, 75);
+
     UG_WindowShow(&wnd);
 }
 
@@ -170,7 +180,7 @@ void windowHandler(UG_MESSAGE *msg)
     decode_msg(msg);
 
     #if defined(UGUI_USE_TOUCH)
-    if((msg->event == OBJ_EVENT_CLICKED) && (msg->type == MSG_TYPE_OBJECT))
+    if(msg->type == MSG_TYPE_OBJECT)
     {
         UG_OBJECT* obj = *(UG_OBJECT**) msg->src;
         if(obj)
@@ -190,6 +200,16 @@ void windowHandler(UG_MESSAGE *msg)
                 y0 = ugui.touch.yp;
             }
         }
+
+        if(UG_ProgressGetProgress(&wnd, PGB_ID_0) == 100)
+            UG_ProgressSetProgress(&wnd, PGB_ID_0, 0);
+        else
+            UG_ProgressSetProgress(&wnd, PGB_ID_0, UG_ProgressGetProgress(&wnd, PGB_ID_0)+1);
+
+        if(UG_ProgressGetProgress(&wnd, PGB_ID_1) == 100)
+            UG_ProgressSetProgress(&wnd, PGB_ID_1, 0);
+        else
+            UG_ProgressSetProgress(&wnd, PGB_ID_1, UG_ProgressGetProgress(&wnd, PGB_ID_1)+1);
     }
     #endif
 }

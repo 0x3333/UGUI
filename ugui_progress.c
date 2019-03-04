@@ -22,6 +22,7 @@ UG_RESULT UG_ProgressCreate( UG_WINDOW* wnd, UG_PROGRESS* pgb, UG_U8 id, UG_S16 
    pgb->style = PGB_STYLE_3D;
    pgb->fc = wnd->fc;
    pgb->bc = wnd->bc;
+   pgb->progress = 0;
 
    /* Initialize standard object parameters */
    obj->update = _UG_ProgressUpdate;
@@ -225,7 +226,8 @@ static void _UG_ProgressUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
    UG_PROGRESS* pgb;
    UG_AREA a;
    UG_TEXT txt;
-   UG_U8 d, w, wps, wpe;
+   UG_U8 d;
+   UG_S16 w, wps, wpe;
 
    /* Get object-specific data */
    pgb = (UG_PROGRESS*)(obj->data);
@@ -277,8 +279,8 @@ static void _UG_ProgressUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             // Draw remaing frame first
             if(wpe > 0)
             {
-               UG_U8 xs = obj->a_abs.xs + d + wps;
-               UG_U8 xe = obj->a_abs.xe - d;
+               UG_S16 xs = obj->a_abs.xs + d + wps;
+               UG_S16 xe = obj->a_abs.xe - d;
                
                if ( pgb->style & PGB_STYLE_FORE_COLOR_MESH )
                {

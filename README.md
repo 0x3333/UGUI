@@ -37,6 +37,7 @@ consists of three files: **ugui.c**, **ugui.h** and **ugui_config.h**.
 * Added Simulation example
 * Added Function to convert from RGB565 to RGB888
 * Added a check to UG_DrawRoundFrame, draw a rect frame in case radius 0
+* Added ProgressBar object
 
 # Commits added from other forks
 
