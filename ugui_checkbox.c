@@ -484,12 +484,6 @@ static void _UG_CheckboxUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
    /* -------------------------------------------------- */
    if ( (obj->touch_state & OBJ_TOUCH_STATE_CHANGED) )
    {
-      /* Handle 'click' event */
-      if ( obj->touch_state & OBJ_TOUCH_STATE_CLICK_ON_OBJECT )
-      {
-         obj->event = CHB_EVENT_CLICKED;
-         obj->state |= OBJ_STATE_UPDATE;
-      }
       /* Is the Checkbox pressed down? */
       if ( obj->touch_state & OBJ_TOUCH_STATE_PRESSED_ON_OBJECT )
       {

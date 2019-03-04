@@ -66,9 +66,6 @@ typedef struct
 #define CHB_STYLE_NO_BORDERS                          (1<<3)
 #define CHB_STYLE_NO_FILL                             (1<<4)
 
-/* Checkbox events */
-#define CHB_EVENT_CLICKED                             OBJ_EVENT_CLICKED
-
 /* Checkbox functions */
 UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* btn, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
 UG_RESULT UG_CheckboxDelete( UG_WINDOW* wnd, UG_U8 id );

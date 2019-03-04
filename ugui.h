@@ -299,18 +299,15 @@ struct S_OBJECT
 
 /* Standard object events */
 #define OBJ_EVENT_NONE                                0
-#ifdef UGUI_USE_TOUCH
-   #define OBJ_EVENT_CLICKED                          1
-#endif
 #ifdef UGUI_USE_PRERENDER_EVENT
-   #define OBJ_EVENT_PRERENDER                        2
+   #define OBJ_EVENT_PRERENDER                        1
 #endif
 #ifdef UGUI_UGUI_USE_POSTRENDER_EVENT
-   #define OBJ_EVENT_POSTRENDER                       3
+   #define OBJ_EVENT_POSTRENDER                       2
 #endif
 #ifdef UGUI_USE_TOUCH
-   #define OBJ_EVENT_PRESSED                          4
-   #define OBJ_EVENT_RELEASED                         5
+   #define OBJ_EVENT_PRESSED                          3
+   #define OBJ_EVENT_RELEASED                         4
 #endif
 
 /* Object states */
@@ -335,7 +332,6 @@ struct S_OBJECT
    #define OBJ_TOUCH_STATE_RELEASED_OUTSIDE_OBJECT    (1<<4)
    #define OBJ_TOUCH_STATE_IS_PRESSED_ON_OBJECT       (1<<5)
    #define OBJ_TOUCH_STATE_IS_PRESSED                 (1<<6)
-   #define OBJ_TOUCH_STATE_CLICK_ON_OBJECT            (1<<7)
    #define OBJ_TOUCH_STATE_INIT                       0
 #endif
 

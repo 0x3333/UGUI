@@ -703,7 +703,7 @@ static void _UG_ProcessTouchData( UG_WINDOW* wnd )
             if ( !(objtouch & OBJ_TOUCH_STATE_IS_PRESSED) )
             {
                objtouch |= OBJ_TOUCH_STATE_PRESSED_OUTSIDE_OBJECT | OBJ_TOUCH_STATE_CHANGED;
-               objtouch &= ~(OBJ_TOUCH_STATE_RELEASED_ON_OBJECT | OBJ_TOUCH_STATE_RELEASED_OUTSIDE_OBJECT | OBJ_TOUCH_STATE_CLICK_ON_OBJECT);
+               objtouch &= ~(OBJ_TOUCH_STATE_RELEASED_ON_OBJECT | OBJ_TOUCH_STATE_RELEASED_OUTSIDE_OBJECT);
             }
             objtouch &= ~OBJ_TOUCH_STATE_IS_PRESSED_ON_OBJECT;
             if ( xp >= obj->a_abs.xs )
@@ -730,7 +730,6 @@ static void _UG_ProcessTouchData( UG_WINDOW* wnd )
          {
             if ( objtouch & OBJ_TOUCH_STATE_IS_PRESSED_ON_OBJECT )
             {
-               if ( objtouch & OBJ_TOUCH_STATE_PRESSED_ON_OBJECT ) objtouch |= OBJ_TOUCH_STATE_CLICK_ON_OBJECT;
                objtouch |= OBJ_TOUCH_STATE_RELEASED_ON_OBJECT;
             }
             else

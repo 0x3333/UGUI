@@ -11,7 +11,7 @@ const UG_COLOR pal_button_pressed[] = {
     C_PAL_BUTTON_PRESSED
 };
 
-static const UG_COLOR pal_button_released[] = {
+const UG_COLOR pal_button_released[] = {
     C_PAL_BUTTON_RELEASED
 };
 
@@ -451,12 +451,6 @@ static void _UG_ButtonUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
    #ifdef UGUI_USE_TOUCH
    if ( (obj->touch_state & OBJ_TOUCH_STATE_CHANGED) )
    {
-      /* Handle 'click' event */
-      if ( obj->touch_state & OBJ_TOUCH_STATE_CLICK_ON_OBJECT )
-      {
-         obj->event = BTN_EVENT_CLICKED;
-         obj->state |= OBJ_STATE_UPDATE;
-      }
       /* Is the button pressed down? */
       if ( obj->touch_state & OBJ_TOUCH_STATE_PRESSED_ON_OBJECT )
       {

@@ -182,7 +182,6 @@ void windowHandler(UG_MESSAGE *msg)
             if(obj->touch_state & OBJ_TOUCH_STATE_RELEASED_OUTSIDE_OBJECT)  printf("|RELEASED_OUTSIDE_OBJECT");
             if(obj->touch_state & OBJ_TOUCH_STATE_IS_PRESSED_ON_OBJECT)     printf("|IS_PRESSED_ON_OBJECT");
             if(obj->touch_state & OBJ_TOUCH_STATE_IS_PRESSED)               printf("|IS_PRESSED");
-            if(obj->touch_state & OBJ_TOUCH_STATE_CLICK_ON_OBJECT)          printf("|CLICK_ON_OBJECT");
             if(obj->touch_state & OBJ_TOUCH_STATE_INIT)                     printf("|INIT");
             printf("\n");
             if( obj->touch_state & OBJ_TOUCH_STATE_IS_PRESSED )

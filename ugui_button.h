@@ -65,9 +65,6 @@ typedef struct
 #define BTN_STYLE_NO_BORDERS                          (1<<3)
 #define BTN_STYLE_NO_FILL                             (1<<4)
 
-/* Button events */
-#define BTN_EVENT_CLICKED                             OBJ_EVENT_CLICKED
-
 /* Button functions */
 UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
 UG_RESULT UG_ButtonDelete( UG_WINDOW* wnd, UG_U8 id );

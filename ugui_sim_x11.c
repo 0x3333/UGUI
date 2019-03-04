@@ -9,6 +9,8 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <execinfo.h>
+#include <signal.h>
 
 #include "ugui_sim.h"
 #include "ugui.h"
@@ -38,8 +40,23 @@ void x11_flush(void);
 bool x11_setup(int width, int height);
 void x11_process();
 
+void handler(int sig) {
+  void *array[10];
+  size_t size;
+
+  // get void*'s for all entries on the stack
+  size = backtrace(array, 10);
+
+  // print out all the frames to stderr
+  fprintf(stderr, "Error: signal %d:\n", sig);
+  backtrace_symbols_fd(array, size, STDERR_FILENO);
+  exit(1);
+}
+
 int main (void)
 {
+    signal(SIGSEGV, handler);   // install our handler
+
     printf("Simulation Application\n");
 
     // Get config
@@ -207,7 +224,6 @@ static const char* message_type[] = {
 };
 static const char* event_type[] = {
     "NONE",
-    "CLICKED",
     "PRERENDER",
     "POSTRENDER",
     "PRESSED",
