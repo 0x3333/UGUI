@@ -52,9 +52,9 @@ use µGUI, only 3 requirements are necessary:
 * integer types for the target platform have to be adjusted in ugui_config.h.
 
 ## Simulator Screenshots
-Simulator running with 2X multiplier.
+Simulator running with 4X multiplier with progress bars.
 
-![Alt text](/.github/simulator-rgb888-x2.jpg?raw=true "Multiplier 2X")
+![Alt text](/.github/simulator-rgb888-x2.jpg?raw=true "Multiplier 4X with Progress Bar")
 
 Simulator running with 4X multiplier.
 
