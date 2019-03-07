@@ -260,19 +260,19 @@ static void _UG_ProgressUpdate(UG_WINDOW* wnd, UG_OBJECT* obj)
             _UG_SendObjectPrerenderEvent(wnd, obj);
 #endif
 
-            d = 0;
+            d = 1;
             /* 3D or 2D style? */
             if ( !(pgb->style & PGB_STYLE_NO_BORDERS) )
             {
                if ( pgb->style & PGB_STYLE_3D )
                {  /* 3D */
                   _UG_DrawObjectFrame(obj->a_abs.xs, obj->a_abs.ys, obj->a_abs.xe, obj->a_abs.ye, (UG_COLOR*)pal_progress);
-                  d = 3;
+                  d += 3;
                }
                else
                {  /* 2D */
                   UG_DrawFrame(obj->a_abs.xs, obj->a_abs.ys, obj->a_abs.xe, obj->a_abs.ye, pgb->fc);
-                  d = 1;
+                  d += 1;
                }
             }
             
