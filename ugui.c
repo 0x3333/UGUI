@@ -1128,7 +1128,6 @@ void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp )
 {
    UG_S16 x,y,xs;
    UG_U16 *p;
-   UG_U16 tmp;
    UG_COLOR c;
 
    if ( bmp->p == NULL ) return;
@@ -1149,9 +1148,10 @@ void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp )
       xp = xs;
       for(x=0;x<bmp->width;x++)
       {
-         tmp = *p++;
          #if defined(UGUI_USE_COLOR_RGB888)
-         c =_UG_ConvertRGB565ToRGB888(tmp);
+         c =_UG_ConvertRGB565ToRGB888(*p++);
+         #else
+         c = *p++;
          #endif
          UG_DrawPixel( xp++ , yp , c );
       }
