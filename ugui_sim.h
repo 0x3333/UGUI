@@ -1,6 +1,8 @@
 #ifndef UGUI_SIM_H_
 #define UGUI_SIM_H_
 
+#include "ugui.h"
+
 typedef struct
 {
     int width;
