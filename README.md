@@ -43,6 +43,9 @@ consists of three files: **ugui.c**, **ugui.h** and **ugui_config.h**.
 
 * https://github.com/stone-payments/UGUI/commit/a8e3da4e0ff2eb1c3c78e0d88a36ae825227726d
     * Add const specifier for not changed variables
+* https://github.com/goat91/UGUI/commit/16f4d171cd16ae2ee4215de48b4638cce3124e7c
+    * Update checked style for checkbox
+        * Note: I didn't added the new style for the checked box, as it doesn't scale to all sizes and displays
 
 ## µGUI Requirements
 µGUI is platform-independent, so there is no need to use a certain embedded system. In order to

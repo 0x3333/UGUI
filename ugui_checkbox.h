@@ -71,7 +71,7 @@ UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* btn, UG_U8 id, UG_S16 
 UG_RESULT UG_CheckboxDelete( UG_WINDOW* wnd, UG_U8 id );
 UG_RESULT UG_CheckboxShow( UG_WINDOW* wnd, UG_U8 id );
 UG_RESULT UG_CheckboxHide( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_CheckboxSetCheched( UG_WINDOW* wnd, UG_U8 id, UG_U8 ch );
+UG_RESULT UG_CheckboxSetChecked( UG_WINDOW* wnd, UG_U8 id, UG_U8 ch );
 UG_RESULT UG_CheckboxSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc );
 UG_RESULT UG_CheckboxSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc );
 UG_RESULT UG_CheckboxSetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR afc );
