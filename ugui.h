@@ -251,7 +251,7 @@ typedef struct
    UG_U8 id;
    UG_U8 sub_id;
    UG_U8 event;
-   void* src;
+   UG_OBJECT* src;
 } UG_MESSAGE;
 
 /* Message types */

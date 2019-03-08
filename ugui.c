@@ -807,7 +807,7 @@ static void _UG_HandleEvents( UG_WINDOW* wnd )
       {
          if ( obj->event != OBJ_EVENT_NONE )
          {
-            msg.src = &obj;
+            msg.src = obj;
             msg.id = obj->type;
             msg.sub_id = obj->id;
             msg.event = obj->event;

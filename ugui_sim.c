@@ -184,7 +184,7 @@ void windowHandler(UG_MESSAGE *msg)
     #if defined(UGUI_USE_TOUCH)
     if(msg->type == MSG_TYPE_OBJECT)
     {
-        UG_OBJECT* obj = *(UG_OBJECT**) msg->src;
+        UG_OBJECT* obj = msg->src;
         if(obj)
         {
             if(obj->touch_state & OBJ_TOUCH_STATE_CHANGED)                  printf("|CHANGED");
