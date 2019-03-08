@@ -987,7 +987,7 @@ UG_RESULT _UG_DeleteObject( UG_WINDOW* wnd, UG_U8 type, UG_U8 id )
 }
 
 #ifdef UGUI_USE_PRERENDER_EVENT
-void _UG_SendObjectPrerenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj)
+void _UG_SendObjectPrerenderEvent( UG_WINDOW *wnd, UG_OBJECT *obj )
 {
    UG_MESSAGE msg;
    msg.event = OBJ_EVENT_PRERENDER;
@@ -1001,7 +1001,7 @@ void _UG_SendObjectPrerenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj)
 #endif
 
 #ifdef UGUI_USE_POSTRENDER_EVENT
-void _UG_SendObjectPostrenderEvent(UG_WINDOW *wnd,UG_OBJECT *obj)
+void _UG_SendObjectPostrenderEvent( UG_WINDOW *wnd, UG_OBJECT *obj )
 {
    UG_MESSAGE msg;
    msg.event = OBJ_EVENT_POSTRENDER;

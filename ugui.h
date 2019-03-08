@@ -302,7 +302,7 @@ struct S_OBJECT
 #ifdef UGUI_USE_PRERENDER_EVENT
    #define OBJ_EVENT_PRERENDER                        1
 #endif
-#ifdef UGUI_UGUI_USE_POSTRENDER_EVENT
+#ifdef UGUI_USE_POSTRENDER_EVENT
    #define OBJ_EVENT_POSTRENDER                       2
 #endif
 #ifdef UGUI_USE_TOUCH
