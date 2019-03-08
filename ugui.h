@@ -418,6 +418,7 @@ typedef struct
    UG_WINDOW* next_window;
    UG_WINDOW* active_window;
    UG_WINDOW* last_window;
+   #if defined(UGUI_USE_CONSOLE)
    struct
    {
       UG_S16 x_pos;
@@ -429,6 +430,7 @@ typedef struct
       UG_COLOR fore_color;
       UG_COLOR back_color;
    } console;
+   #endif
    UG_FONT font;
    UG_S8 char_h_space;
    UG_S8 char_v_space;
@@ -461,10 +463,12 @@ void UG_DrawArc( UG_S16 x0, UG_S16 y0, UG_S16 r, UG_U8 s, UG_COLOR c );
 void UG_DrawLine( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c );
 void UG_PutString( UG_S16 x, UG_S16 y, const char* str );
 void UG_PutChar( const char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc );
+#if defined(UGUI_USE_CONSOLE)
 void UG_ConsolePutString( const char* str );
 void UG_ConsoleSetArea( UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
 void UG_ConsoleSetForecolor( UG_COLOR c );
 void UG_ConsoleSetBackcolor( UG_COLOR c );
+#endif
 void UG_SetForecolor( UG_COLOR c );
 void UG_SetBackcolor( UG_COLOR c );
 UG_S16 UG_GetXDim( void );

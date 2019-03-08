@@ -38,12 +38,14 @@ UG_S16 UG_Init( UG_GUI* g, void (*pset)(UG_S16,UG_S16,UG_COLOR), void (*flush)(v
    g->flush = (void(*)(void))flush;
    g->x_dim = x;
    g->y_dim = y;
+#if defined(UGUI_USE_CONSOLE)
    g->console.x_start = 4;
    g->console.y_start = 4;
    g->console.x_end = g->x_dim - g->console.x_start-1;
    g->console.y_end = g->y_dim - g->console.x_start-1;
    g->console.x_pos = g->console.x_end;
    g->console.y_pos = g->console.y_end;
+#endif
    g->char_h_space = 1;
    g->char_v_space = 1;
    g->font.p = NULL;
@@ -451,6 +453,7 @@ void UG_PutChar( const char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc )
    _UG_PutChar(chr,x,y,fc,bc,&gui->font);
 }
 
+#if defined(UGUI_USE_CONSOLE)
 void UG_ConsolePutString( const char* str )
 {
    char chr;
@@ -503,6 +506,7 @@ void UG_ConsoleSetBackcolor( UG_COLOR c )
 {
    gui->console.back_color = c;
 }
+#endif
 
 void UG_SetForecolor( UG_COLOR c )
 {
