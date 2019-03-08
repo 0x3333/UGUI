@@ -15,6 +15,9 @@
 /* Enable Touch Support */
 // #define UGUI_USE_TOUCH
 
+/* Enable Console Support */
+#define UGUI_USE_CONSOLE
+
 /* Enable needed fonts */
 #define __UG_FONT_DATA const
 

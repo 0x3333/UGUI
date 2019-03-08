@@ -33,6 +33,7 @@ typedef struct x11_data_s
 //Global Vars -- I hate these too
 x11_data_t *handle;
 simcfg_t *simCfg;
+UG_DEVICE device;
 
 //Internal function declarations
 void x11_pset(UG_S16 x, UG_S16 y, UG_COLOR c);
@@ -70,7 +71,12 @@ int main (void)
         return 0;
     }
     //Setup UGUI
-    GUI_Setup(&x11_pset, &x11_flush, simCfg->width, simCfg->height);
+    device.x_dim = simCfg->width;
+    device.y_dim = simCfg->height;
+    device.pset = &x11_pset;
+    device.flush = &x11_flush;
+
+    GUI_Setup(&device);
     while (true)
     {
         GUI_Process();

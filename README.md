@@ -39,6 +39,7 @@ consists of three files: **ugui.c**, **ugui.h** and **ugui_config.h**.
 * Added a check to UG_DrawRoundFrame, draw a rect frame in case radius 0
 * Added ProgressBar object
 * Console support is optional using `UGUI_USE_CONSOLE` define.
+* Created a UG_DEVICE struct to hold device information.
 
 ## To Do List
 A [To Do List](TODO.md) has been added.

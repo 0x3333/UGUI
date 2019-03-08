@@ -20,7 +20,9 @@
 // Global Vars
 simcfg_t *simCfg;
 
+UG_DEVICE device;
 UG_GUI ugui;
+
 UG_WINDOW wnd;
 UG_BUTTON btn0;
 UG_BUTTON btn1;
@@ -61,10 +63,10 @@ simcfg_t* GUI_SimCfg(void)
 
 #define OBJ_Y(i)        BTN_HEIGHT*i+(INITIAL_MARGIN*(i+1))
 
-void GUI_Setup(void *pset, void *flush, int w, int h)
+void GUI_Setup(UG_DEVICE *device)
 {
     //Setup UGUI
-    UG_Init(&ugui, pset, flush, w, h);
+    UG_Init(&ugui, device);
 
     UG_FillScreen(C_BLACK);
 

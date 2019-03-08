@@ -406,12 +406,23 @@ typedef struct
 /* -------------------------------------------------------------------------------- */
 /* -- µGUI CORE STRUCTURE                                                        -- */
 /* -------------------------------------------------------------------------------- */
-typedef struct
-{
-   void (*pset)(UG_S16,UG_S16,UG_COLOR);
-   void (*flush)(void);
+
+struct _UG_DEVICE;
+typedef struct _UG_DEVICE UG_DEVICE;
+
+typedef void ( *PixelSetFunc )( UG_S16, UG_S16, UG_COLOR );
+typedef void ( *FlushFunc )( void );
+
+struct _UG_DEVICE {
    UG_S16 x_dim;
    UG_S16 y_dim;
+   PixelSetFunc pset;
+   FlushFunc flush;
+};
+
+typedef struct
+{
+   UG_DEVICE *device;
    #ifdef UGUI_USE_TOUCH
    UG_TOUCH touch;
    #endif
@@ -447,7 +458,7 @@ typedef struct
 /* -- PROTOTYPES                                                                 -- */
 /* -------------------------------------------------------------------------------- */
 /* Classic functions */
-UG_S16 UG_Init( UG_GUI* g, void (*p)(UG_S16,UG_S16,UG_COLOR), void (*flush)(void), UG_S16 x, UG_S16 y );
+UG_S16 UG_Init( UG_GUI* g, UG_DEVICE *device );
 UG_S16 UG_SelectGUI( UG_GUI* g );
 void UG_FontSelect( const UG_FONT* font );
 void UG_FillScreen( UG_COLOR c );
