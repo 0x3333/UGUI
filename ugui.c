@@ -28,7 +28,7 @@ static const UG_COLOR pal_window[] = {
 };
 
 /* Pointer to the gui */
-UG_GUI* gui;
+static UG_GUI* gui;
 
 UG_S16 UG_Init( UG_GUI* g, UG_DEVICE *device )
 {
@@ -73,6 +73,11 @@ UG_S16 UG_SelectGUI( UG_GUI* g )
 {
    gui = g;
    return 1;
+}
+
+UG_GUI* UG_GetGUI( void )
+{
+   return gui;
 }
 
 void UG_FontSelect( const UG_FONT* font )

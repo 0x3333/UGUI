@@ -460,6 +460,8 @@ typedef struct
 /* Classic functions */
 UG_S16 UG_Init( UG_GUI* g, UG_DEVICE *device );
 UG_S16 UG_SelectGUI( UG_GUI* g );
+UG_GUI* UG_GetGUI( void );
+
 void UG_FontSelect( const UG_FONT* font );
 void UG_FillScreen( UG_COLOR c );
 void UG_FillFrame( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c );
