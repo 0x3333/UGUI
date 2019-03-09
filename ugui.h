@@ -563,7 +563,4 @@ UG_S16 UG_WindowGetOuterWidth( UG_WINDOW* wnd );
 UG_S16 UG_WindowGetInnerHeight( UG_WINDOW* wnd );
 UG_S16 UG_WindowGetOuterHeight( UG_WINDOW* wnd );
 
-/* Pointer to the gui */
-extern UG_GUI* gui;
-
 #endif
