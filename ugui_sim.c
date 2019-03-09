@@ -198,8 +198,8 @@ void windowHandler(UG_MESSAGE *msg)
             printf("\n");
             if( obj->touch_state & OBJ_TOUCH_STATE_IS_PRESSED )
             {
-                x0 = ugui.touch.xp;
-                y0 = ugui.touch.yp;
+                x0 = UG_GetGUI()->touch.xp;
+                y0 = UG_GetGUI()->touch.yp;
             }
         }
 

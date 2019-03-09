@@ -16,8 +16,7 @@ UG_RESULT UG_TextboxCreate( UG_WINDOW* wnd, UG_TEXTBOX* txb, UG_U8 id, UG_S16 xs
 
    /* Initialize object-specific parameters */
    txb->str = NULL;
-   if (gui != NULL) txb->font = &gui->font;
-   else txb->font = NULL;
+   txb->font = UG_GetGUI() != NULL ? &(UG_GetGUI()->font) : NULL;
    txb->style = 0; /* reserved */
    txb->fc = wnd->fc;
    txb->bc = wnd->bc;

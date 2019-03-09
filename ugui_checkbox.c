@@ -30,8 +30,7 @@ UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* chb, UG_U8 id, UG_S16 
    chb->afc = wnd->fc;
    chb->style = CHB_STYLE_3D;
    chb->align = ALIGN_TOP_LEFT;
-   if (gui != NULL) chb->font = &gui->font;
-   else chb->font = NULL;
+   chb->font = UG_GetGUI() != NULL ? &(UG_GetGUI()->font) : NULL;
    chb->str = "-";
    chb->checked = 0; 
 

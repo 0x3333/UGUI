@@ -30,8 +30,7 @@ UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, 
    btn->afc = wnd->fc;
    btn->style = BTN_STYLE_3D;
    btn->align = ALIGN_CENTER;
-   if (gui != NULL) btn->font = &gui->font;
-   else btn->font = NULL;
+   btn->font = UG_GetGUI() != NULL ? &(UG_GetGUI()->font) : NULL;
    btn->str = "-";
 
    /* Initialize standard object parameters */
