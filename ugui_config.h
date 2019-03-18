@@ -16,10 +16,9 @@
 // #define UGUI_USE_TOUCH
 
 /* Enable Console Support */
-#define UGUI_USE_CONSOLE
+// #define UGUI_USE_CONSOLE
 
 /* Enable needed fonts */
-#define __UG_FONT_DATA const
 
 // #define UGUI_USE_FONT_4X6
 // #define UGUI_USE_FONT_5X8
@@ -44,7 +43,9 @@
 // #define UGUI_USE_POSTRENDER_EVENT
 // #define UGUI_USE_MULTITASKING
 
-/* Specify platform-dependent integer types here */
+/* Specify platform-dependent types here */
+
+#define __UG_FONT_DATA const
 
 typedef uint8_t      UG_U8;
 typedef int8_t       UG_S8;
